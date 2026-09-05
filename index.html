@@ -1,279 +1,1319 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>For You</title>
-  <style>
-    :root{
-      --bg:#fff7f9;
-      --accent:#ff6b9a;
-      --muted:#6b6b6b;
-      --card:#ffffff;
-      --shadow: 0 8px 24px rgba(0,0,0,0.08);
-      --radius:14px;
-      font-family: "Helvetica Neue", Arial, sans-serif;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#080006">
+<title>Someone left you a surprise ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Georgia,"Times New Roman",serif;
+}
+
+:root{
+    --pink:#ff4f87;
+    --pink2:#ff9fbd;
+    --dark:#090006;
+    --white:#fff;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    overflow-x:hidden;
+    color:white;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,50,100,.15),transparent 30%),
+        radial-gradient(circle at 80% 80%,rgba(255,0,76,.12),transparent 30%),
+        linear-gradient(135deg,#050003,#24000d,#050003);
+}
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.hidden{
+    display:none!important;
+}
+
+.screen{
+    min-height:100vh;
+    width:100%;
+}
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+#hearts{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:50;
+}
+
+.floating-heart{
+    position:absolute;
+    bottom:-60px;
+    opacity:0;
+    color:#ff6b9a;
+    filter:drop-shadow(0 0 8px rgba(255,70,120,.5));
+    animation:floatHeart linear forwards;
+}
+
+@keyframes floatHeart{
+    0%{
+        transform:translateY(0) rotate(0) scale(.6);
+        opacity:0;
     }
-    *{
-       font-family: Georgia, 'Times New Roman', Times, serif;
+    10%{
+        opacity:.75;
     }
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#36000041);color:#15010126}
-    .wrap{
-      min-height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:40px 20px;
-      box-sizing:border-box;
+    50%{
+        transform:translateY(-55vh) rotate(180deg) scale(1);
     }
-    .card{
-      width:100%;
-      max-width:920px;
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:0;
+    100%{
+        transform:translateY(-115vh) rotate(360deg) scale(.5);
+        opacity:0;
     }
-    @media(max-width:880px){
-      .card{grid-template-columns:1fr;max-width:720px}
+}
+
+/* =====================================================
+   INTRO SCREEN
+===================================================== */
+
+#intro{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    position:relative;
+    overflow:hidden;
+}
+
+.intro-content{
+    width:100%;
+    max-width:600px;
+    animation:introIn 1.2s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes introIn{
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(.95);
     }
-    .left{
-      padding:48px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-      justify-content:center;
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
     }
-    .title{
-      font-size:33px;
-      font-weight:900;
-      color:var(--accent);
-      letter-spacing:0.1px;
+}
+
+.intro-heart{
+    font-size:75px;
+    display:inline-block;
+    filter:drop-shadow(0 0 25px rgba(255,70,120,.5));
+    animation:bigHeart 1.5s ease-in-out infinite;
+}
+
+@keyframes bigHeart{
+    0%,100%{
+        transform:scale(1);
     }
-    .subtitle{
-      font-size:18px;
-      color:var(--muted);
-      margin-top:6px;
+    50%{
+        transform:scale(1.15);
     }
-    .message{
-      margin-top:12px;
-      font-size:16px;
-      line-height:1.6;
-      color:#333;
+}
+
+.intro-content h1{
+    margin-top:25px;
+    font-size:clamp(32px,7vw,58px);
+    line-height:1.1;
+}
+
+.intro-content h1 span{
+    color:var(--pink2);
+}
+
+.intro-content p{
+    margin:18px auto 35px;
+    max-width:470px;
+    color:#d9c0c9;
+    font-size:17px;
+    line-height:1.7;
+}
+
+.open-btn{
+    border:0;
+    padding:16px 30px;
+    border-radius:50px;
+    cursor:pointer;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#ff4f87,#ff205d);
+    box-shadow:0 15px 40px rgba(255,40,90,.3);
+    transition:.3s;
+}
+
+.open-btn:hover{
+    transform:translateY(-5px) scale(1.04);
+    box-shadow:0 20px 50px rgba(255,40,90,.45);
+}
+
+.open-btn:active{
+    transform:scale(.95);
+}
+
+/* =====================================================
+   ENVELOPE SCREEN
+===================================================== */
+
+#envelopeScreen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+.envelope-wrapper{
+    width:100%;
+    max-width:440px;
+}
+
+.envelope-title{
+    font-size:28px;
+    margin-bottom:45px;
+    color:#ffe9ef;
+}
+
+.envelope{
+    width:310px;
+    height:205px;
+    margin:auto;
+    position:relative;
+    cursor:pointer;
+    perspective:1000px;
+    filter:drop-shadow(0 25px 35px rgba(0,0,0,.45));
+}
+
+.envelope-body{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,#ff477e,#d91950);
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.envelope-body:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(145deg,transparent 49%,rgba(0,0,0,.12) 50%,transparent 51%);
+}
+
+.flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:155px solid transparent;
+    border-right:155px solid transparent;
+    border-top:105px solid #ff789c;
+    transform-origin:top center;
+    transition:1s cubic-bezier(.16,1,.3,1);
+    z-index:5;
+}
+
+.letter{
+    position:absolute;
+    left:20px;
+    right:20px;
+    bottom:15px;
+    height:170px;
+    background:#fff8fa;
+    color:#6d263d;
+    border-radius:8px;
+    padding:25px;
+    transition:1s cubic-bezier(.16,1,.3,1);
+    z-index:2;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.letter-heart{
+    font-size:35px;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+    z-index:1;
+}
+
+.envelope.open .letter{
+    transform:translateY(-130px);
+}
+
+.tap-text{
+    margin-top:35px;
+    color:#d6bdc6;
+    animation:pulseText 1.5s infinite;
+}
+
+@keyframes pulseText{
+    50%{opacity:.45}
+}
+
+/* =====================================================
+   MAIN EXPERIENCE
+===================================================== */
+
+#main{
+    padding:35px 18px 50px;
+    position:relative;
+}
+
+.main-card{
+    width:100%;
+    max-width:950px;
+    min-height:590px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1fr 400px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.075);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:28px;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.55),
+        inset 0 1px rgba(255,255,255,.1);
+
+    animation:mainIn 1.2s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes mainIn{
+    from{
+        opacity:0;
+        transform:translateY(50px) scale(.94);
     }
-    .actions{
-      margin-top:18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
     }
-    .btn{
-      background:var(--accent);
-      color:#fff;
-      border:none;
-      padding:12px 18px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:600;
-      box-shadow:0 6px 18px rgba(17, 0, 5, 0.797);
-      &:hover{
-        box-shadow:0 6px 18px rgba(17, 0, 5, 0.797);
-        background:#fff;
-        color:#ff6b9a;
-      }
+}
+
+/* =====================================================
+   LEFT
+===================================================== */
+
+.left{
+    padding:55px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.title{
+    font-size:42px;
+    line-height:1.15;
+}
+
+.title span{
+    color:var(--pink2);
+}
+
+.subtitle{
+    margin-top:12px;
+    color:#d8c1c9;
+    font-size:18px;
+}
+
+.message{
+    min-height:130px;
+    margin-top:28px;
+    font-size:17px;
+    line-height:1.85;
+    color:#f7e9ed;
+}
+
+.cursor{
+    display:inline-block;
+    width:2px;
+    height:18px;
+    background:var(--pink);
+    animation:blink .7s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0}
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:12px;
+}
+
+.btn{
+    border:0;
+    padding:14px 21px;
+    border-radius:50px;
+    cursor:pointer;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#ff4f87,#ff205d);
+    box-shadow:0 10px 30px rgba(255,40,90,.22);
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(255,40,90,.35);
+}
+
+.btn.ghost{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.15);
+}
+
+/* =====================================================
+   LOVE NOTE
+===================================================== */
+
+.note-container{
+    display:none;
+    margin-top:25px;
+    animation:noteIn .8s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes noteIn{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.note{
+    position:relative;
+    padding:27px 23px;
+    border-radius:20px;
+    background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,79,135,.07));
+    border:1px solid rgba(255,255,255,.14);
+    color:#ffe9ef;
+    line-height:1.8;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.note strong{
+    color:#ff9fbd;
+}
+
+footer{
+    margin-top:25px;
+    color:#bfa8b0;
+    font-size:14px;
+}
+
+/* =====================================================
+   RIGHT
+===================================================== */
+
+.right{
+    min-height:590px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    background:radial-gradient(circle,rgba(255,79,135,.14),transparent 62%);
+}
+
+.music-status{
+    position:absolute;
+    top:20px;
+    right:20px;
+    padding:8px 13px;
+    border-radius:30px;
+    font-size:12px;
+    color:#d8c1c9;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.photo-ring{
+    width:300px;
+    height:300px;
+    padding:6px;
+    border-radius:50%;
+    background:conic-gradient(#ff4f87,#ffc1d3,#ff205d,#ff4f87);
+    box-shadow:0 0 55px rgba(255,70,120,.25);
+    animation:spin 8s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+.photo{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background-image:url("image.jpg");
+    background-size:cover;
+    background-position:center;
+    border:6px solid #160007;
+    animation:counterSpin 8s linear infinite;
+}
+
+@keyframes counterSpin{
+    to{transform:rotate(-360deg)}
+}
+
+.small{
+    margin-top:25px;
+    color:#ecd6dc;
+}
+
+.hearts-row{
+    display:flex;
+    gap:13px;
+    margin-top:20px;
+}
+
+.mini-heart{
+    width:18px;
+    height:18px;
+    background:#ff4f87;
+    transform:rotate(-45deg);
+    animation:miniBeat 1.4s infinite;
+    position:relative;
+}
+
+.mini-heart:before,
+.mini-heart:after{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:#ff4f87;
+    border-radius:50%;
+}
+
+.mini-heart:before{
+    top:-9px;
+}
+
+.mini-heart:after{
+    left:9px;
+}
+
+@keyframes miniBeat{
+    50%{transform:scale(1.25) rotate(-45deg)}
+}
+
+/* =====================================================
+   FINAL MESSAGE
+===================================================== */
+
+.final-message{
+    max-width:700px;
+    margin:50px auto 0;
+    text-align:center;
+    opacity:0;
+    transform:translateY(30px);
+    transition:1s;
+}
+
+.final-message.show{
+    opacity:1;
+    transform:none;
+}
+
+.final-message .rose{
+    font-size:45px;
+}
+
+.final-message h2{
+    margin-top:15px;
+    font-size:30px;
+}
+
+.final-message p{
+    margin-top:15px;
+    color:#d8c1c9;
+    line-height:1.8;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:880px){
+
+    .main-card{
+        grid-template-columns:1fr;
     }
 
-    .btn.ghost{
-      background:transparent;
-      color:var(--accent);
-      border:2px solid rgba(255,107,154,0.12);
-    
-        &:hover{
-        box-shadow:0 6px 18px rgba(17, 0, 5, 0.797);
-        background:#ff6b9a;
-        color: #fff;
-      }
-    }
-    .note{
-      margin-top:8px;
-      font-size:14px;
-      color:var(--muted);
-    }
-
-    /* right column */
     .right{
-      background:linear-gradient(180deg, rgba(255,107,154,0.06), rgba(255,107,154,0.02));
-      padding:28px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:16px;
-    }
-    .photo{
-      width:260px;
-      height:260px;
-      border-radius:50%;
-      background-size:cover;
-      background-position:center;
-      box-shadow:0 12px 30px rgba(0,0,0,0.08);
-      border:6px solid rgba(255,255,255,0.6);
-    }
-    .small{
-      font-size:14px;
-      color:var(--muted);
+        order:-1;
+        min-height:430px;
+        padding-top:40px;
     }
 
-    /* heart animation */
-    .hearts{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      margin-top:6px;
-    }
-    .heart{
-      width:18px;height:18px;background:var(--accent);
-      transform:rotate(-45deg);
-      border-radius:4px 4px 0 0;
-      position:relative;
-      animation:beat 1.2s infinite;
-    }
-    .heart::before,.heart::after{
-      content:"";
-      position:absolute;
-      width:18px;height:18px;
-      background:var(--accent);
-      border-radius:50%;
-      top:-9px;
-      left:0;
-    }
-    .heart::after{left:9px}
-    @keyframes beat{
-      0%{transform:scale(1) rotate(-45deg)}
-      50%{transform:scale(1.18) rotate(-45deg)}
-      100%{transform:scale(1) rotate(-45deg)}
+    .left{
+        padding:40px 28px;
     }
 
-    /* reveal note */
-    .hidden-note{
-      margin-top:12px;
-      padding:14px;
-      background:linear-gradient(90deg, rgba(255,107,154,0.06), rgba(255,107,154,0.02));
-      border-radius:10px;
-      display:none;
-      color:#333;
-      font-size:15px;
+    .title{
+        font-size:34px;
     }
 
-    footer{
-      margin-top:18px;
-      font-size:18px;
-      color:var(--muted);
-      text-align:center;
-     
+}
+
+@media(max-width:480px){
+
+    .envelope{
+        transform:scale(.82);
     }
-  </style>
+
+    .intro-content h1{
+        font-size:34px;
+    }
+
+    .intro-content p{
+        font-size:15px;
+    }
+
+    .photo-ring{
+        width:220px;
+        height:220px;
+    }
+
+    .right{
+        min-height:360px;
+    }
+
+    .left{
+        padding:30px 20px;
+    }
+
+    .title{
+        font-size:29px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="card" role="main" aria-label="Romantic page">
-      <div class="left">
-        <div>
-          <div class="title">For the one who makes my heart smile</div>
-          <div class="subtitle">A little page I made just for you</div>
-        </div>
 
-        <div class="message">
-          Every day with you feels like a favorite song. I made this to remind you how much you mean to me — your laugh, your kindness, and the quiet moments we share.
-        </div>
+<!-- Floating hearts -->
+<div id="hearts"></div>
 
-        <div class="actions">
-          <button class="btn" id="revealBtn">Open my note</button>
-          <button class="btn ghost" id="surpriseBtn">Play a surprise</button>
-        </div>
 
-        <div class="note"></div>
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
-        <div class="hidden-note" id="note">
-          I love you more than words can hold. Thank you for being my partner, my friend, and my home. — <strong>RAY</strong>
-        </div>
+<section id="intro" class="screen">
 
-        <footer>For You PePe❤️</footer>
-      </div>
+    <div class="intro-content">
 
-      <div class="right">
-        <div class="photo" id="photo"
-          style="background-image:url(image.jpg);"
-          aria-label="Photo placeholder">
-        </div>
+        <div class="intro-heart">❤️</div>
 
-        <div class="small">You are my favorite person</div>
+        <h1>
+            Someone left you<br>
+            <span>a surprise...</span>
+        </h1>
 
-        <div class="hearts" aria-hidden="true">
-          <div class="heart" style="animation-delay:0s"></div>
-          <div class="heart" style="animation-delay:0.15s"></div>
-          <div class="heart" style="animation-delay:0.3s"></div>
-        </div>
-      </div>
+        <p>
+            This little message was made especially for you.
+            But there's only one way to find out what's inside.
+        </p>
+
+        <button class="open-btn" id="startBtn">
+            💌 Open your surprise
+        </button>
+
     </div>
-  </div>
 
-  <script>
-    // Simple interactivity: reveal note and optional audio
-    const revealBtn = document.getElementById('revealBtn');
-    const note = document.getElementById('note');
-    const surpriseBtn = document.getElementById('surpriseBtn');
+</section>
 
-    revealBtn.addEventListener('click', () => {
-      note.style.display = note.style.display === 'block' ? 'none' : 'block';
-      revealBtn.textContent = note.style.display === 'block' ? 'Hide my note' : 'Open my note';
-    });
 
-    // Surprise plays a short built-in melody using WebAudio API (no external file)
-    surpriseBtn.addEventListener('click', async () => {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type = 'sine';
-        o.frequency.value = 440;
-        o.connect(g);
-        g.connect(ctx.destination);
-        g.gain.value = 0;
-        const now = ctx.currentTime;
-        g.gain.linearRampToValueAtTime(0.12, now + 0.02);
-        o.start(now);
-        o.frequency.setValueAtTime(440, now);
-        o.frequency.linearRampToValueAtTime(660, now + 0.18);
-        o.frequency.linearRampToValueAtTime(550, now + 0.36);
-        g.gain.linearRampToValueAtTime(0.0, now + 1.2);
-        o.stop(now + 1.25);
-      } catch (e) {
-        alert('Audio not supported in this browser.');
-      }
-    });
+<!-- =====================================================
+     ENVELOPE
+===================================================== -->
 
-    // Optional: allow quick customization via URL params ?name=HerName&photo=URL
-    (function applyParams(){
-      const params = new URLSearchParams(location.search);
-      const name = params.get('name');
-      const photo = params.get('photo');
-      const customMsg = params.get('msg');
-      if(name){
-        document.querySelector('.title').textContent = `For ${name}, with love`;
-        document.querySelector('.small').textContent = `You are my favorite person, ${name}`;
-        document.getElementById('note').innerHTML = `I love you more than words can hold. Thank you for being my partner, my friend, and my home. — <strong>${'Abdulrasheed'}</strong>`;
-      }
-      if(photo){
-        document.getElementById('photo').style.backgroundImage = `url('${photo}')`;
-      }
-      if(customMsg){
-        document.querySelector('.message').innerHTML = customMsg;
-      }
-    })();
-  </script>
+<section id="envelopeScreen" class="screen hidden">
+
+    <div class="envelope-wrapper">
+
+        <div class="envelope-title">
+            A little something from my heart ❤️
+        </div>
+
+        <div class="envelope" id="envelope">
+
+            <div class="envelope-body"></div>
+
+            <div class="letter">
+                <div class="letter-heart">❤️</div>
+                <br>
+                I made this just for you...
+            </div>
+
+            <div class="flap"></div>
+
+        </div>
+
+        <div class="tap-text">
+            Tap the envelope to open it
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
+<section id="main" class="hidden">
+
+    <div class="main-card">
+
+        <!-- LEFT -->
+        <div class="left">
+
+            <div class="title">
+                For the one who makes my
+                <span>heart smile ❤️</span>
+            </div>
+
+            <div class="subtitle">
+                A little page I made just for you...
+            </div>
+
+            <div class="message">
+                <span id="typing"></span><span class="cursor"></span>
+            </div>
+
+            <div class="actions">
+
+                <button class="btn" id="noteBtn">
+                    💌 Open my note
+                </button>
+
+                <button class="btn ghost" id="musicBtn">
+                    🎵 Play surprise
+                </button>
+
+            </div>
+
+            <div class="note-container" id="noteContainer">
+
+                <div class="note">
+
+                    I love you more than words can hold. ❤️
+
+                    <br><br>
+
+                    Thank you for being my partner, my friend,
+                    and my home.
+
+                    <br><br>
+
+                    If I had to choose one person all over again,
+                    in every lifetime, I'd still choose
+                    <strong>you.</strong>
+
+                    <br><br>
+
+                    You are my favorite person, my favorite
+                    smile, and one of the best things that ever
+                    happened to me.
+
+                    <br><br>
+
+                    Forever yours... 🌹
+
+                    <br><br>
+
+                    — <strong>Abdulrasheed</strong>
+
+                </div>
+
+            </div>
+
+            <footer>
+                Made with ❤️ just for you, PePe
+            </footer>
+
+        </div>
+
+
+        <!-- RIGHT -->
+        <div class="right">
+
+            <div class="music-status" id="musicStatus">
+                ♫ Music off
+            </div>
+
+            <div class="photo-ring">
+
+                <div class="photo" id="photo"></div>
+
+            </div>
+
+            <div class="small">
+                You are my favorite person ❤️
+            </div>
+
+            <div class="hearts-row">
+
+                <div class="mini-heart"></div>
+
+                <div
+                    class="mini-heart"
+                    style="animation-delay:.2s">
+                </div>
+
+                <div
+                    class="mini-heart"
+                    style="animation-delay:.4s">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Final reveal -->
+    <div class="final-message" id="finalMessage">
+
+        <div class="rose">🌹</div>
+
+        <h2>
+            And just in case you forgot...
+        </h2>
+
+        <p>
+            You are loved. You are appreciated.
+            And you mean more to me than this little page
+            could ever explain. ❤️
+        </p>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const intro = document.getElementById("intro");
+const envelopeScreen = document.getElementById("envelopeScreen");
+const main = document.getElementById("main");
+
+const startBtn = document.getElementById("startBtn");
+const envelope = document.getElementById("envelope");
+
+const typing = document.getElementById("typing");
+const noteBtn = document.getElementById("noteBtn");
+const noteContainer = document.getElementById("noteContainer");
+
+const musicBtn = document.getElementById("musicBtn");
+const musicStatus = document.getElementById("musicStatus");
+
+const finalMessage = document.getElementById("finalMessage");
+
+
+/* =====================================================
+   START EXPERIENCE
+===================================================== */
+
+startBtn.addEventListener("click",()=>{
+
+    intro.classList.add("hidden");
+
+    envelopeScreen.classList.remove("hidden");
+
+    createBurst();
+
+});
+
+
+/* =====================================================
+   OPEN ENVELOPE
+===================================================== */
+
+envelope.addEventListener("click",()=>{
+
+    if(envelope.classList.contains("open")) return;
+
+    envelope.classList.add("open");
+
+    createBurst();
+
+    setTimeout(()=>{
+
+        envelopeScreen.classList.add("hidden");
+
+        main.classList.remove("hidden");
+
+        startTyping();
+
+        createBurst();
+
+    },1500);
+
+});
+
+
+/* =====================================================
+   TYPING EFFECT
+===================================================== */
+
+let message =
+"Every day with you feels like a favorite song. I made this little page to remind you how much you mean to me — your laugh, your kindness, and every quiet moment we share.";
+
+let typeIndex = 0;
+
+function startTyping(){
+
+    typing.textContent = "";
+
+    typeIndex = 0;
+
+    typeNext();
+
+}
+
+function typeNext(){
+
+    if(typeIndex < message.length){
+
+        typing.textContent += message.charAt(typeIndex);
+
+        typeIndex++;
+
+        setTimeout(typeNext,35);
+
+    }
+
+}
+
+
+/* =====================================================
+   LOVE NOTE
+===================================================== */
+
+noteBtn.addEventListener("click",()=>{
+
+    const open =
+        noteContainer.style.display === "block";
+
+    if(open){
+
+        noteContainer.style.display = "none";
+
+        noteBtn.innerHTML =
+            "💌 Open my note";
+
+    }else{
+
+        noteContainer.style.display = "block";
+
+        noteBtn.innerHTML =
+            "💗 Hide my note";
+
+        createBurst();
+
+        setTimeout(()=>{
+
+            finalMessage.classList.add("show");
+
+        },700);
+
+    }
+
+});
+
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+const hearts =
+document.getElementById("hearts");
+
+const symbols = [
+    "❤️","💗","💖","💕","💓","💘"
+];
+
+function floatingHeart(){
+
+    const h =
+        document.createElement("div");
+
+    h.className = "floating-heart";
+
+    h.textContent =
+        symbols[
+            Math.floor(Math.random()*symbols.length)
+        ];
+
+    h.style.left =
+        Math.random()*100 + "vw";
+
+    h.style.fontSize =
+        (12 + Math.random()*22) + "px";
+
+    h.style.animationDuration =
+        (6 + Math.random()*8) + "s";
+
+    hearts.appendChild(h);
+
+    setTimeout(()=>{
+        h.remove();
+    },15000);
+
+}
+
+setInterval(floatingHeart,450);
+
+
+/* =====================================================
+   HEART BURST
+===================================================== */
+
+function createBurst(){
+
+    for(let i=0;i<20;i++){
+
+        const h =
+            document.createElement("div");
+
+        h.textContent =
+            symbols[
+                Math.floor(Math.random()*symbols.length)
+            ];
+
+        h.style.position = "fixed";
+        h.style.left = "50%";
+        h.style.top = "50%";
+        h.style.zIndex = "100";
+        h.style.pointerEvents = "none";
+        h.style.fontSize =
+            (18 + Math.random()*18) + "px";
+
+        const angle =
+            Math.random()*Math.
+        const distance =
+            100 + Math.random()*280;
+
+        const x =
+            Math.cos(angle)*distance;
+
+        const y =
+            Math.sin(angle)*distance;
+
+        h.animate([
+
+            {
+                transform:"translate(-50%,-50%) scale(.3)",
+                opacity:1
+            },
+
+            {
+                transform:
+                    `translate(calc(-50% + ${x}px),calc(-50% + ${y}px)) scale(1.3) rotate(360deg)`,
+                opacity:0
+            }
+
+        ],{
+
+            duration:1100 + Math.random()*500,
+            easing:"cubic-bezier(.16,1,.3,1)"
+
+        });
+
+        document.body.appendChild(h);
+
+        setTimeout(()=>{
+            h.remove();
+        },1700);
+
+    }
+
+}
+
+
+/* =====================================================
+   BUILT-IN MUSIC
+===================================================== */
+
+let audioContext = null;
+let musicPlaying = false;
+let musicTimer = null;
+
+function playTone(ctx,frequency,start,duration){
+
+    const oscillator =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+    oscillator.type = "sine";
+
+    oscillator.frequency.setValueAtTime(
+        frequency,
+        start
+    );
+
+    gain.gain.setValueAtTime(
+        0,
+        start
+    );
+
+    gain.gain.linearRampToValueAtTime(
+        .065,
+        start+.03
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        start+duration
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(ctx.destination);
+
+    oscillator.start(start);
+
+    oscillator.stop(start+duration);
+
+}
+
+function startMusic(){
+
+    audioContext =
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+    const melody = [
+
+        261.63,
+        329.63,
+        392.00,
+        523.25,
+
+        392.00,
+        329.63,
+        293.66,
+        349.23,
+
+        440.00,
+        523.25,
+        440.00,
+        349.23
+
+    ];
+
+    let i = 0;
+
+    musicPlaying = true;
+
+    musicTimer =
+        setInterval(()=>{
+
+            if(!musicPlaying) return;
+
+            const now =
+                audioContext.currentTime;
+
+            playTone(
+                audioContext,
+                melody[i],
+                now,
+                .85
+            );
+
+            i =
+                (i+1)%melody.length;
+
+        },700);
+
+    musicBtn.innerHTML =
+        "⏸ Stop music";
+
+    musicStatus.innerHTML =
+        "♫ Music playing";
+
+    createBurst();
+
+}
+
+function stopMusic(){
+
+    musicPlaying = false;
+
+    clearInterval(musicTimer);
+
+    if(audioContext){
+
+        audioContext.close();
+
+        audioContext = null;
+
+    }
+
+    musicBtn.innerHTML =
+        "🎵 Play surprise";
+
+    musicStatus.innerHTML =
+        "♫ Music off";
+
+}
+
+musicBtn.addEventListener("click",()=>{
+
+    if(musicPlaying){
+
+        stopMusic();
+
+    }else{
+
+        startMusic();
+
+    }
+
+});
+
+
+/* =====================================================
+   URL CUSTOMIZATION
+=====================================================
+
+Example:
+
+index.html?name=PePe
+
+index.html?name=PePe&photo=image.jpg
+
+index.html?name=PePe&msg=You%20mean%20everything%20to%20me
+
+===================================================== */
+
+(function(){
+
+    const params =
+        new URLSearchParams(location.search);
+
+    const name =
+        params.get("name");
+
+    const photo =
+        params.get("photo");
+
+    const customMsg =
+        params.get("msg");
+
+
+    if(name){
+
+        document.title =
+            `For ${name} ❤️`;
+
+        document.querySelector(".title").innerHTML =
+            `For ${name}, with <span>love ❤️</span>`;
+
+        document.querySelector(".small").textContent =
+            `You are my favorite person, ${name} ❤️`;
+
+    }
+
+
+    if(photo){
+
+        document.getElementById("photo")
+            .style.backgroundImage =
+            `url("${photo}")`;
+
+    }
+
+
+    if(customMsg){
+
+        message =
+            customMsg;
+
+    }
+
+})();
+
+
+/* =====================================================
+   CLEANUP
+===================================================== */
+
+window.addEventListener("beforeunload",()=>{
+
+    if(audioContext){
+
+        audioContext.close();
+
+    }
+
+});
+
+</script>
+
 </body>
 </html>
