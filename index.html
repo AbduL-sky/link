@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
+      content="width=device-width,
+      initial-scale=1.0,
       viewport-fit=cover">
 
 <meta name="theme-color" content="#080808">
@@ -12,13 +14,19 @@
 <title>For You ❤️</title>
 
 <style>
+
+/* =========================
+   RESET
+========================= */
+
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   width:100%;
   min-height:100%;
 }
@@ -26,15 +34,22 @@ html,body{
 body{
   min-height:100svh;
   overflow-x:hidden;
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 50% 0%,#3b0718 0%,#12030a 42%,#050505 100%);
-  color:#fff;
-}
 
-/* =========================
-   COMMON
-========================= */
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      #3b0718 0%,
+      #12030a 42%,
+      #050505 100%
+    );
+}
 
 button{
   border:0;
@@ -47,20 +62,28 @@ button{
   display:none !important;
 }
 
+
+/* =========================
+   SCREENS
+========================= */
+
 .screen{
   width:100%;
   min-height:100svh;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   padding:
-    max(20px,env(safe-area-inset-top))
-    16px
-    max(20px,env(safe-area-inset-bottom));
+    max(18px,env(safe-area-inset-top))
+    14px
+    max(18px,env(safe-area-inset-bottom));
 }
 
+
 /* =========================
-   INTRO SCREEN
+   INTRO
 ========================= */
 
 #intro{
@@ -71,48 +94,75 @@ button{
 
 .intro-content{
   width:100%;
-  max-width:420px;
-  animation:fadeUp .9s ease both;
+  max-width:390px;
+
+  animation:fadeUp .8s ease both;
 }
 
 .intro-heart{
-  width:88px;
-  height:88px;
-  margin:0 auto 24px;
+  width:76px;
+  height:76px;
+
+  margin:0 auto 22px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   border-radius:50%;
+
   background:rgba(255,35,95,.12);
+
   border:1px solid rgba(255,90,130,.25);
-  font-size:42px;
+
+  font-size:36px;
+
   animation:pulse 2s infinite;
-  box-shadow:0 0 45px rgba(255,30,90,.2);
+
+  box-shadow:
+    0 0 40px rgba(255,30,90,.2);
 }
 
 .intro-content h1{
-  font-size:clamp(30px,8vw,52px);
-  line-height:1.05;
+  font-size:clamp(30px,8vw,50px);
+  line-height:1.06;
+
   margin-bottom:14px;
 }
 
 .intro-content p{
   color:#d8c4ca;
-  font-size:16px;
+
+  font-size:15px;
   line-height:1.6;
-  margin-bottom:28px;
+
+  margin-bottom:25px;
 }
 
 .primary-btn{
   width:100%;
-  max-width:330px;
-  min-height:54px;
-  padding:14px 22px;
+  max-width:320px;
+
+  min-height:53px;
+
+  padding:14px 20px;
+
   border-radius:999px;
-  color:white;
-  background:linear-gradient(135deg,#ff286b,#ff557f);
-  box-shadow:0 12px 35px rgba(255,30,90,.25);
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff286b,
+      #ff557f
+    );
+
+  box-shadow:
+    0 12px 35px rgba(255,30,90,.25);
+
   font-weight:700;
+
   transition:.25s ease;
 }
 
@@ -120,13 +170,18 @@ button{
   transform:scale(.96);
 }
 
+
 /* =========================
    ENVELOPE
 ========================= */
 
 #envelopeScreen{
   background:
-    radial-gradient(circle at center,#2d0715 0%,#080808 65%);
+    radial-gradient(
+      circle at center,
+      #2d0715 0%,
+      #080808 65%
+    );
 }
 
 .envelope-wrap{
@@ -136,77 +191,135 @@ button{
 }
 
 .envelope-title{
-  font-size:25px;
-  margin-bottom:30px;
+  font-size:24px;
+  line-height:1.2;
+
+  margin-bottom:28px;
 }
 
 .envelope{
   position:relative;
-  width:min(86vw,330px);
-  height:min(56vw,215px);
-  min-height:175px;
+
+  width:min(84vw,330px);
+  height:min(53vw,205px);
+
+  min-height:165px;
+
   margin:auto;
+
   perspective:900px;
+
   cursor:pointer;
 }
 
 .env-body{
   position:absolute;
   inset:0;
+
   border-radius:12px;
-  background:linear-gradient(145deg,#ff416f,#bd123f);
-  box-shadow:0 25px 70px rgba(255,20,80,.3);
+
+  background:
+    linear-gradient(
+      145deg,
+      #ff416f,
+      #bd123f
+    );
+
+  box-shadow:
+    0 25px 70px rgba(255,20,80,.3);
+
   overflow:hidden;
 }
 
 .env-body::before,
 .env-body::after{
   content:"";
+
   position:absolute;
   bottom:0;
+
   width:70%;
   height:100%;
+
   background:rgba(100,0,25,.2);
 }
 
 .env-body::before{
   left:0;
-  clip-path:polygon(0 0,100% 100%,0 100%);
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 100%,
+      0 100%
+    );
 }
 
 .env-body::after{
   right:0;
-  clip-path:polygon(100% 0,100% 100%,0 100%);
+
+  clip-path:
+    polygon(
+      100% 0,
+      100% 100%,
+      0 100%
+    );
 }
 
 .flap{
   position:absolute;
+
   z-index:3;
+
   top:0;
   left:0;
+
   width:100%;
   height:60%;
+
   background:#ff557d;
-  clip-path:polygon(0 0,100% 0,50% 100%);
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+
   transform-origin:top;
-  transition:transform .8s cubic-bezier(.2,.8,.2,1);
+
+  transition:
+    transform .8s
+    cubic-bezier(.2,.8,.2,1);
 }
 
 .letter{
   position:absolute;
+
   z-index:2;
+
   left:8%;
+
   width:84%;
   height:80%;
+
   bottom:5%;
+
   border-radius:8px;
+
   background:#fff7fa;
+
   color:#3a1420;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:34px;
-  transition:transform 1s cubic-bezier(.2,.8,.2,1);
+
+  transition:
+    transform 1s
+    cubic-bezier(.2,.8,.2,1);
 }
 
 .envelope.open .flap{
@@ -214,151 +327,306 @@ button{
 }
 
 .envelope.open .letter{
-  transform:translateY(-75px);
+  transform:translateY(-70px);
 }
 
 .tap-text{
-  margin-top:30px;
+  margin-top:28px;
+
   color:#cdb7bf;
+
   font-size:14px;
+
   animation:pulse 1.8s infinite;
 }
 
+
 /* =========================
-   MAIN PAGE
+   MAIN SCREEN
 ========================= */
 
 #mainScreen{
   display:block;
+
   padding:
-    max(14px,env(safe-area-inset-top))
-    14px
-    max(90px,env(safe-area-inset-bottom));
+    max(12px,env(safe-area-inset-top))
+    12px
+    max(75px,env(safe-area-inset-bottom));
 }
 
-.wrap{
+
+/*
+  IMPORTANT:
+  The inner wrap must NOT have
+  min-height:100svh.
+*/
+
+#mainScreen > .wrap{
   width:100%;
   max-width:960px;
-  margin:auto;
+
+  min-height:0;
+
+  margin:0 auto;
+
+  padding:0;
 }
+
+
+/* =========================
+   CARD
+========================= */
 
 .card{
   width:100%;
-  background:rgba(18,18,20,.88);
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:24px;
+
+  background:
+    rgba(18,18,20,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  border-radius:20px;
+
   overflow:hidden;
+
   box-shadow:
-    0 30px 100px rgba(0,0,0,.55),
-    0 0 60px rgba(255,20,80,.08);
+    0 25px 80px rgba(0,0,0,.55),
+    0 0 50px rgba(255,20,80,.07);
+
   backdrop-filter:blur(15px);
 }
 
+
+/* =========================
+   CONTENT
+========================= */
+
 .content{
-  padding:24px 18px 26px;
+  padding:
+    22px
+    17px
+    18px;
+
   text-align:center;
 }
 
 .badge{
   display:inline-flex;
+
   align-items:center;
+  justify-content:center;
+
   gap:6px;
-  padding:7px 12px;
+
+  padding:
+    6px
+    11px;
+
   border-radius:999px;
-  background:rgba(255,50,100,.1);
-  border:1px solid rgba(255,80,120,.16);
+
+  background:
+    rgba(255,50,100,.10);
+
+  border:
+    1px solid
+    rgba(255,80,120,.16);
+
   color:#ff9eb7;
-  font-size:12px;
-  margin-bottom:18px;
+
+  font-size:11px;
+
+  margin-bottom:15px;
 }
 
 .title{
-  font-size:clamp(29px,8vw,52px);
-  line-height:1.06;
-  letter-spacing:-1.5px;
-  margin-bottom:12px;
+  width:100%;
+
+  font-size:
+    clamp(
+      27px,
+      8vw,
+      52px
+    );
+
+  line-height:1.08;
+
+  letter-spacing:-1px;
+
+  margin-bottom:10px;
+
+  overflow-wrap:anywhere;
 }
 
 .subtitle{
   color:#bfaeb4;
-  font-size:14px;
+
+  font-size:13px;
+
   line-height:1.5;
-  margin-bottom:24px;
+
+  margin-bottom:17px;
 }
 
+
+/* =========================
+   TYPING MESSAGE
+========================= */
+
 .message-box{
-  min-height:105px;
+  width:100%;
+
+  min-height:85px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:8px 4px;
+
+  padding:
+    4px
+    0;
 }
 
 .message{
-  max-width:600px;
+  width:100%;
+  max-width:560px;
+
   color:#f4e9ec;
-  font-size:16px;
-  line-height:1.75;
+
+  font-size:15px;
+
+  line-height:1.65;
+
+  overflow-wrap:anywhere;
 }
 
 .cursor{
   display:inline-block;
+
   width:2px;
-  height:17px;
+  height:16px;
+
   margin-left:3px;
+
   vertical-align:-2px;
+
   background:#ff4775;
+
   animation:blink .8s infinite;
 }
 
+
+/* =========================
+   PHOTO
+========================= */
+
 .photo-section{
-  padding:0 18px 22px;
+  width:100%;
+
+  padding:
+    4px
+    18px
+    20px;
+
+  display:flex;
+  justify-content:center;
 }
 
 .photo{
-  width:100%;
+  width:
+    min(
+      58vw,
+      205px
+    );
+
   aspect-ratio:1/1;
-  max-width:240px;
-  margin:auto;
-  border-radius:20px;
+
+  border-radius:50%;
+
   overflow:hidden;
+
   background:
-    linear-gradient(135deg,#250711,#090909);
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 20px 50px rgba(0,0,0,.45);
+    linear-gradient(
+      135deg,
+      #250711,
+      #090909
+    );
+
+  border:
+    5px solid
+    rgba(255,255,255,.92);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.45);
+
+  flex-shrink:0;
+
+  animation:
+    photoFloat 4s ease-in-out infinite;
 }
 
 .photo img{
   width:100%;
   height:100%;
+
   display:block;
+
   object-fit:cover;
 }
+
 
 /* =========================
    BUTTONS
 ========================= */
 
 .actions{
+  width:100%;
+
   display:flex;
   flex-direction:column;
-  gap:11px;
-  padding:0 18px;
+
+  gap:9px;
+
+  padding:
+    0
+    17px;
 }
 
 .action-btn{
   width:100%;
-  min-height:52px;
-  padding:13px 18px;
-  border-radius:15px;
+
+  min-height:49px;
+
+  padding:
+    12px
+    16px;
+
+  border-radius:13px;
+
   color:#fff;
+
   background:#222225;
-  border:1px solid rgba(255,255,255,.08);
-  transition:.25s ease;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  font-size:14px;
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
 }
 
 .action-btn.primary{
-  background:linear-gradient(135deg,#ff286b,#d91650);
+  background:
+    linear-gradient(
+      135deg,
+      #ff286b,
+      #d91650
+    );
+
   border:0;
 }
 
@@ -366,39 +634,72 @@ button{
   transform:scale(.97);
 }
 
+
 /* =========================
-   LOVE NOTE
+   NOTE
 ========================= */
 
 .note{
-  width:calc(100% - 36px);
-  margin:22px auto 0;
-  padding:20px 17px;
-  border-radius:18px;
-  background:rgba(255,255,255,.035);
-  border:1px solid rgba(255,255,255,.07);
+  width:
+    calc(100% - 34px);
+
+  margin:
+    17px
+    auto
+    0;
+
+  padding:
+    16px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
   text-align:left;
-  animation:noteIn .6s ease both;
+
+  animation:
+    noteIn .45s ease both;
 }
 
 .note h3{
   color:#ff7295;
-  font-size:16px;
-  margin-bottom:9px;
+
+  font-size:15px;
+
+  margin-bottom:8px;
 }
 
 .note p{
   color:#d6c8cc;
-  font-size:14px;
+
+  font-size:13px;
+
   line-height:1.7;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 .footer{
   text-align:center;
-  padding:24px 15px 6px;
+
+  padding:
+    19px
+    12px
+    5px;
+
   color:#806f75;
-  font-size:12px;
+
+  font-size:11px;
 }
+
 
 /* =========================
    MUSIC BUTTON
@@ -406,21 +707,39 @@ button{
 
 .music-btn{
   position:fixed;
+
   z-index:100;
-  right:16px;
-  bottom:max(16px,env(safe-area-inset-bottom));
-  width:52px;
-  height:52px;
+
+  right:15px;
+
+  bottom:
+    max(
+      15px,
+      env(safe-area-inset-bottom)
+    );
+
+  width:50px;
+  height:50px;
+
   border-radius:50%;
-  color:white;
-  background:rgba(255,35,90,.92);
-  box-shadow:0 10px 35px rgba(255,20,80,.3);
-  font-size:20px;
+
+  color:#fff;
+
+  background:
+    rgba(255,35,90,.94);
+
+  box-shadow:
+    0 10px 35px
+    rgba(255,20,80,.3);
+
+  font-size:19px;
 }
 
 .music-btn.playing{
-  animation:musicPulse 1.2s infinite;
+  animation:
+    musicPulse 1.2s infinite;
 }
+
 
 /* =========================
    FLOATING HEARTS
@@ -428,68 +747,141 @@ button{
 
 .hearts{
   position:fixed;
+
   inset:0;
+
   z-index:1;
+
   pointer-events:none;
+
   overflow:hidden;
 }
 
 .heart{
   position:absolute;
+
   bottom:-30px;
+
   color:#ff4775;
+
   opacity:0;
-  animation:floatHeart linear forwards;
+
+  animation:
+    floatHeart
+    linear
+    forwards;
 }
 
+
 /* =========================
-   HEART BURST
+   BURST HEARTS
 ========================= */
 
 .burst-heart{
   position:fixed;
+
   z-index:999;
+
   pointer-events:none;
+
   font-size:20px;
-  animation:burst 1s ease-out forwards;
+
+  animation:
+    burst
+    1s
+    ease-out
+    forwards;
 }
+
+
+/* =========================
+   TABLETS
+========================= */
+
+@media(min-width:600px){
+
+  .content{
+    padding:
+      30px
+      25px
+      25px;
+  }
+
+  .title{
+    font-size:40px;
+  }
+
+  .message{
+    font-size:16px;
+  }
+
+  .photo{
+    width:240px;
+  }
+
+  .actions{
+    flex-direction:row;
+  }
+
+  .action-btn{
+    width:auto;
+    flex:1;
+  }
+
+}
+
 
 /* =========================
    DESKTOP
 ========================= */
 
-@media (min-width:700px){
+@media(min-width:800px){
 
   #mainScreen{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     padding:40px;
   }
 
   .card{
     display:grid;
-    grid-template-columns:1fr 330px;
-    align-items:center;
-    padding:38px;
+
+    grid-template-columns:
+      minmax(0,1fr)
+      330px;
+
     gap:35px;
+
+    padding:38px;
   }
 
   .content{
     padding:0;
+
     text-align:left;
   }
 
   .badge{
-    margin-bottom:20px;
+    margin-bottom:18px;
   }
 
   .title{
-    font-size:48px;
+    font-size:46px;
+  }
+
+  .subtitle{
+    font-size:14px;
+
+    text-align:left;
   }
 
   .message-box{
     justify-content:flex-start;
+
+    min-height:105px;
   }
 
   .message{
@@ -498,6 +890,8 @@ button{
 
   .photo-section{
     padding:0;
+
+    align-items:center;
   }
 
   .photo{
@@ -506,8 +900,10 @@ button{
 
   .actions{
     flex-direction:row;
+
     padding:0;
-    margin-top:25px;
+
+    margin-top:20px;
   }
 
   .action-btn{
@@ -516,115 +912,232 @@ button{
 
   .note{
     width:100%;
-    margin-top:22px;
+
+    margin:
+      20px
+      0
+      0;
   }
 
   .footer{
     text-align:left;
   }
+
 }
 
+
 /* =========================
-   SMALL PHONES
+   VERY SMALL PHONES
 ========================= */
 
-@media (max-width:380px){
+@media(max-width:360px){
 
-  .screen{
-    padding-left:12px;
-    padding-right:12px;
+  #mainScreen{
+    padding-left:8px;
+    padding-right:8px;
   }
 
-  .intro-content h1{
-    font-size:30px;
+  .card{
+    border-radius:16px;
   }
 
-  .intro-content p{
-    font-size:14px;
-  }
-
-  .envelope-title{
-    font-size:22px;
+  .content{
+    padding:
+      20px
+      14px
+      15px;
   }
 
   .title{
-    font-size:28px;
+    font-size:25px;
   }
 
-  .photo{
-    max-width:205px;
+  .subtitle{
+    font-size:12px;
   }
 
   .message{
-    font-size:15px;
+    font-size:14px;
+  }
+
+  .message-box{
+    min-height:78px;
+  }
+
+  .photo-section{
+    padding-bottom:18px;
+  }
+
+  .photo{
+    width:175px;
+  }
+
+  .actions{
+    padding:
+      0
+      14px;
   }
 
   .action-btn{
-    min-height:49px;
+    min-height:47px;
+    font-size:13px;
   }
+
+  .note{
+    width:
+      calc(100% - 28px);
+
+    margin-top:14px;
+  }
+
 }
+
+
+/* =========================
+   SHORT PHONE
+========================= */
+
+@media(
+  max-height:650px
+) and (
+  max-width:600px
+){
+
+  .content{
+    padding-top:17px;
+  }
+
+  .badge{
+    margin-bottom:10px;
+  }
+
+  .title{
+    font-size:25px;
+    margin-bottom:7px;
+  }
+
+  .subtitle{
+    margin-bottom:10px;
+  }
+
+  .message-box{
+    min-height:65px;
+  }
+
+  .photo{
+    width:155px;
+  }
+
+  .photo-section{
+    padding-bottom:14px;
+  }
+
+  .footer{
+    padding-top:13px;
+  }
+
+}
+
 
 /* =========================
    ANIMATIONS
 ========================= */
 
 @keyframes fadeUp{
+
   from{
     opacity:0;
     transform:translateY(25px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
   }
+
 }
 
 @keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.06)}
+
+  0%,
+  100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.06);
+  }
+
 }
 
 @keyframes blink{
-  50%{opacity:0}
+
+  50%{
+    opacity:0;
+  }
+
 }
 
 @keyframes noteIn{
+
   from{
     opacity:0;
     transform:translateY(15px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
   }
+
 }
 
 @keyframes floatHeart{
+
   0%{
-    transform:translateY(0) rotate(0);
+    transform:
+      translateY(0)
+      rotate(0);
+
     opacity:0;
   }
+
   10%{
     opacity:.8;
   }
+
   100%{
-    transform:translateY(-110vh) rotate(360deg);
+    transform:
+      translateY(-110vh)
+      rotate(360deg);
+
     opacity:0;
   }
+
 }
 
 @keyframes musicPulse{
+
   50%{
     transform:scale(1.08);
-    box-shadow:0 0 35px rgba(255,40,100,.6);
+
+    box-shadow:
+      0 0 35px
+      rgba(255,40,100,.6);
   }
+
 }
 
 @keyframes burst{
+
   0%{
-    transform:translate(-50%,-50%) scale(.5);
+    transform:
+      translate(-50%,-50%)
+      scale(.5);
+
     opacity:1;
   }
+
   100%{
     transform:
       translate(
@@ -633,46 +1146,76 @@ button{
       )
       scale(1.4)
       rotate(180deg);
+
     opacity:0;
   }
+
 }
 
-@media (prefers-reduced-motion:reduce){
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
   *,
   *::before,
   *::after{
     animation-duration:.01ms !important;
+
     animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
+
+    transition:none !important;
   }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <!-- FLOATING HEARTS -->
-<div class="hearts" id="hearts"></div>
 
-<!-- =========================
+<div
+  class="hearts"
+  id="hearts">
+</div>
+
+
+<!-- =================================
      INTRO
-========================= -->
+================================= -->
 
-<section class="screen" id="intro">
+<section
+  class="screen"
+  id="intro">
 
   <div class="intro-content">
 
-    <div class="intro-heart">❤️</div>
+    <div class="intro-heart">
+      ❤️
+    </div>
 
-    <h1>Someone left you<br>a surprise...</h1>
+    <h1>
+      Someone left you<br>
+      a surprise...
+    </h1>
 
     <p>
       There is a little something here
       made especially for you.
     </p>
 
-    <button class="primary-btn" id="openBtn">
+    <button
+      class="primary-btn"
+      id="openBtn">
+
       Open Surprise 💌
+
     </button>
 
   </div>
@@ -680,11 +1223,13 @@ button{
 </section>
 
 
-<!-- =========================
+<!-- =================================
      ENVELOPE
-========================= -->
+================================= -->
 
-<section class="screen hidden" id="envelopeScreen">
+<section
+  class="screen hidden"
+  id="envelopeScreen">
 
   <div class="envelope-wrap">
 
@@ -692,7 +1237,9 @@ button{
       You have a love letter 💕
     </h2>
 
-    <div class="envelope" id="envelope">
+    <div
+      class="envelope"
+      id="envelope">
 
       <div class="env-body"></div>
 
@@ -713,15 +1260,20 @@ button{
 </section>
 
 
-<!-- =========================
-     MAIN ROMANTIC PAGE
-========================= -->
+<!-- =================================
+     MAIN PAGE
+================================= -->
 
-<section class="screen hidden" id="mainScreen">
+<section
+  class="screen hidden"
+  id="mainScreen">
 
   <div class="wrap">
 
     <div class="card">
+
+
+      <!-- CONTENT -->
 
       <div>
 
@@ -731,61 +1283,103 @@ button{
             ❤️ Made with love
           </div>
 
-          <h1 class="title" id="title">
-            For the one who makes my heart smile
+
+          <h1
+            class="title"
+            id="title">
+
+            For the one who makes
+            my heart smile
+
           </h1>
 
+
           <p class="subtitle">
+
             Some people are special...
             and then there is you.
+
           </p>
+
 
           <div class="message-box">
 
             <p class="message">
+
               <span id="typing"></span>
+
               <span class="cursor"></span>
+
             </p>
 
           </div>
 
         </div>
 
+
+        <!-- BUTTONS -->
+
         <div class="actions">
 
           <button
             class="action-btn primary"
             id="noteBtn">
+
             Open my note 💌
+
           </button>
+
 
           <button
             class="action-btn"
             id="surpriseBtn">
+
             Play a surprise 🎵
+
           </button>
 
         </div>
 
-        <div class="note hidden" id="note">
 
-          <h3>A little note for you ❤️</h3>
+        <!-- NOTE -->
+
+        <div
+          class="note hidden"
+          id="note">
+
+          <h3>
+            A little note for you ❤️
+          </h3>
 
           <p id="noteText">
-            I don't always know the perfect words,
-            but I hope you know just how special
-            you are to me. Every moment with you
+
+            I don't always know the
+            perfect words, but I hope you
+            know just how special you are
+            to me. Every moment with you
             is something I treasure.
+
           </p>
 
         </div>
 
+
+        <!-- FOOTER -->
+
         <div class="footer">
-          For You <span id="footerName">PePe</span> ❤️
+
+          For You
+          <span id="footerName">
+            PePe
+          </span>
+          ❤️
+
         </div>
 
       </div>
 
+
+      <!-- PHOTO -->
 
       <div class="photo-section">
 
@@ -800,6 +1394,7 @@ button{
 
       </div>
 
+
     </div>
 
   </div>
@@ -807,267 +1402,472 @@ button{
 </section>
 
 
-<!-- MUSIC -->
+<!-- MUSIC BUTTON -->
+
 <button
   class="music-btn hidden"
   id="musicBtn"
   aria-label="Play or pause music">
+
   🎵
+
 </button>
 
 
 <script>
-/* =========================
-   URL CUSTOMIZATION
-========================= */
 
-const params = new URLSearchParams(window.location.search);
+/* =================================
+   URL PARAMETERS
+================================= */
 
-const nameParam = params.get("name");
-const customMsg = params.get("msg");
-const photoParam = params.get("photo");
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const nameParam =
+  params.get("name");
+
+const customMsg =
+  params.get("msg");
+
+const photoParam =
+  params.get("photo");
+
 
 const defaultMessage =
   "You make ordinary moments feel special, " +
-  "and somehow you always manage to put a smile on my face.";
+  "and somehow you always manage to put " +
+  "a smile on my face.";
 
-let message = customMsg || defaultMessage;
 
-const title = document.getElementById("title");
-const footerName = document.getElementById("footerName");
-const photo = document.getElementById("photo");
-const typing = document.getElementById("typing");
-const noteText = document.getElementById("noteText");
+let message =
+  customMsg || defaultMessage;
+
+
+/* =================================
+   ELEMENTS
+================================= */
+
+const intro =
+  document.getElementById("intro");
+
+const envelopeScreen =
+  document.getElementById(
+    "envelopeScreen"
+  );
+
+const mainScreen =
+  document.getElementById(
+    "mainScreen"
+  );
+
+const openBtn =
+  document.getElementById(
+    "openBtn"
+  );
+
+const envelope =
+  document.getElementById(
+    "envelope"
+  );
+
+const title =
+  document.getElementById(
+    "title"
+  );
+
+const footerName =
+  document.getElementById(
+    "footerName"
+  );
+
+const photo =
+  document.getElementById(
+    "photo"
+  );
+
+const typing =
+  document.getElementById(
+    "typing"
+  );
+
+const noteText =
+  document.getElementById(
+    "noteText"
+  );
+
+const smallText =
+  document.getElementById(
+    "smallText"
+  );
+
+const note =
+  document.getElementById(
+    "note"
+  );
+
+const noteBtn =
+  document.getElementById(
+    "noteBtn"
+  );
+
+const surpriseBtn =
+  document.getElementById(
+    "surpriseBtn"
+  );
+
+const musicBtn =
+  document.getElementById(
+    "musicBtn"
+  );
+
+const hearts =
+  document.getElementById(
+    "hearts"
+  );
+
+
+/* =================================
+   APPLY URL DATA
+================================= */
 
 if(nameParam){
-  const safeName = nameParam.trim();
 
-  footerName.textContent = safeName;
+  const cleanName =
+    nameParam.trim();
 
   title.textContent =
-    `For ${safeName}, the one who makes my heart smile`;
-}
+    `For ${cleanName}, the one who makes my heart smile`;
 
-if(photoParam){
-  photo.src = photoParam;
+  footerName.textContent =
+    cleanName;
+
 }
 
 if(customMsg){
-  noteText.textContent = customMsg;
+
+  noteText.textContent =
+    customMsg;
+
+}
+
+if(photoParam){
+
+  photo.src =
+    photoParam;
+
 }
 
 
-/* =========================
-   SCREEN FLOW
-========================= */
+/* =================================
+   OPEN SURPRISE
+================================= */
 
-const intro = document.getElementById("intro");
-const envelopeScreen =
-  document.getElementById("envelopeScreen");
+openBtn.addEventListener(
+  "click",
+  function(){
 
-const mainScreen =
-  document.getElementById("mainScreen");
+    intro.classList.add(
+      "hidden"
+    );
 
-const openBtn =
-  document.getElementById("openBtn");
+    envelopeScreen.classList.remove(
+      "hidden"
+    );
 
-const envelope =
-  document.getElementById("envelope");
-
-const musicBtn =
-  document.getElementById("musicBtn");
-
-
-openBtn.addEventListener("click", () => {
-
-  intro.classList.add("hidden");
-
-  envelopeScreen.classList.remove("hidden");
-
-});
+  }
+);
 
 
-envelope.addEventListener("click", () => {
+/* =================================
+   OPEN ENVELOPE
+================================= */
 
-  if(envelope.classList.contains("open")) return;
+envelope.addEventListener(
+  "click",
+  function(){
 
-  envelope.classList.add("open");
-
-  setTimeout(() => {
-
-    envelopeScreen.classList.add("hidden");
-
-    mainScreen.classList.remove("hidden");
-
-    musicBtn.classList.remove("hidden");
-
-    startTyping();
-
-    createHearts();
-
-  },1100);
-
-});
+    if(
+      envelope.classList.contains(
+        "open"
+      )
+    ){
+      return;
+    }
 
 
-/* =========================
+    envelope.classList.add(
+      "open"
+    );
+
+
+    setTimeout(
+      function(){
+
+        envelopeScreen.classList.add(
+          "hidden"
+        );
+
+        mainScreen.classList.remove(
+          "hidden"
+        );
+
+        musicBtn.classList.remove(
+          "hidden"
+        );
+
+        startTyping();
+
+        createHearts();
+
+      },
+      1100
+    );
+
+  }
+);
+
+
+/* =================================
    TYPING EFFECT
-========================= */
+================================= */
 
-let typingStarted = false;
+let typingStarted =
+  false;
 
 function startTyping(){
 
-  if(typingStarted) return;
+  if(typingStarted){
+    return;
+  }
 
-  typingStarted = true;
+  typingStarted =
+    true;
 
-  typing.textContent = "";
+  typing.textContent =
+    "";
 
-  let index = 0;
+  let index =
+    0;
+
 
   function type(){
 
     if(index < message.length){
 
-      typing.textContent += message.charAt(index);
+      typing.textContent +=
+        message.charAt(index);
 
       index++;
 
-      setTimeout(type,35);
+      setTimeout(
+        type,
+        32
+      );
 
     }
 
   }
 
   type();
+
 }
 
 
-/* =========================
+/* =================================
    LOVE NOTE
-========================= */
+================================= */
 
-const noteBtn =
-  document.getElementById("noteBtn");
+noteBtn.addEventListener(
+  "click",
+  function(){
 
-const note =
-  document.getElementById("note");
-
-noteBtn.addEventListener("click", () => {
-
-  note.classList.toggle("hidden");
-
-  if(!note.classList.contains("hidden")){
-
-    noteBtn.textContent = "Close my note 💕";
-
-    heartBurst(
-      window.innerWidth / 2,
-      window.innerHeight / 2
+    note.classList.toggle(
+      "hidden"
     );
 
-  }else{
 
-    noteBtn.textContent = "Open my note 💌";
+    if(
+      !note.classList.contains(
+        "hidden"
+      )
+    ){
+
+      noteBtn.textContent =
+        "Close my note 💕";
+
+      heartBurst(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+      );
+
+    }else{
+
+      noteBtn.textContent =
+        "Open my note 💌";
+
+    }
 
   }
+);
 
-});
 
-
-/* =========================
+/* =================================
    FLOATING HEARTS
-========================= */
-
-const hearts =
-  document.getElementById("hearts");
+================================= */
 
 function createHearts(){
 
-  setInterval(() => {
+  setInterval(
+    function(){
 
-    const heart =
-      document.createElement("div");
+      const heart =
+        document.createElement(
+          "div"
+        );
 
-    heart.className = "heart";
+      heart.className =
+        "heart";
 
-    heart.textContent =
-      Math.random() > .5 ? "❤" : "♡";
+      heart.textContent =
+        Math.random() > .5
+          ? "❤"
+          : "♡";
 
-    heart.style.left =
-      Math.random() * 100 + "%";
 
-    heart.style.fontSize =
-      (12 + Math.random() * 18) + "px";
+      heart.style.left =
+        Math.random() * 100 + "%";
 
-    heart.style.animationDuration =
-      (5 + Math.random() * 5) + "s";
 
-    hearts.appendChild(heart);
+      heart.style.fontSize =
+        (
+          12 +
+          Math.random() * 18
+        ) + "px";
 
-    setTimeout(() => {
-      heart.remove();
-    },10000);
 
-  },700);
+      heart.style.animationDuration =
+        (
+          5 +
+          Math.random() * 5
+        ) + "s";
+
+
+      hearts.appendChild(
+        heart
+      );
+
+
+      setTimeout(
+        function(){
+
+          heart.remove();
+
+        },
+        10000
+      );
+
+    },
+    700
+  );
 
 }
 
 
-/* =========================
+/* =================================
    HEART BURST
-========================= */
+================================= */
 
 function heartBurst(x,y){
 
-  for(let i=0;i<18;i++){
+  for(
+    let i = 0;
+    i < 18;
+    i++
+  ){
 
     const heart =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
-    heart.className = "burst-heart";
+    heart.className =
+      "burst-heart";
 
     heart.textContent =
-      Math.random() > .5 ? "❤️" : "💕";
+      Math.random() > .5
+        ? "❤️"
+        : "💕";
 
-    heart.style.left = x + "px";
-    heart.style.top = y + "px";
+
+    heart.style.left =
+      x + "px";
+
+    heart.style.top =
+      y + "px";
+
 
     const angle =
-      Math.random() * Math.PI * 2;
+      Math.random() *
+      Math.PI *
+      2;
+
 
     const distance =
-      70 + Math.random() * 150;
+      70 +
+      Math.random() *
+      150;
+
 
     heart.style.setProperty(
       "--x",
-      Math.cos(angle) * distance + "px"
+      Math.cos(angle) *
+      distance +
+      "px"
     );
+
 
     heart.style.setProperty(
       "--y",
-      Math.sin(angle) * distance + "px"
+      Math.sin(angle) *
+      distance +
+      "px"
     );
 
-    document.body.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    },1000);
+    document.body.appendChild(
+      heart
+    );
+
+
+    setTimeout(
+      function(){
+
+        heart.remove();
+
+      },
+      1000
+    );
 
   }
 
 }
 
 
-/* =========================
+/* =================================
    MUSIC
-========================= */
+================================= */
 
-let audioContext = null;
-let musicPlaying = false;
-let musicTimer = null;
+let audioContext =
+  null;
+
+let musicPlaying =
+  false;
+
+let musicTimer =
+  null;
+
 
 function startMusic(){
 
@@ -1081,16 +1881,33 @@ function startMusic(){
 
   }
 
-  if(audioContext.state === "suspended"){
+
+  if(
+    audioContext.state ===
+    "suspended"
+  ){
+
     audioContext.resume();
+
   }
 
-  if(musicPlaying) return;
 
-  musicPlaying = true;
+  if(musicPlaying){
+    return;
+  }
 
-  musicBtn.textContent = "🔊";
-  musicBtn.classList.add("playing");
+
+  musicPlaying =
+    true;
+
+
+  musicBtn.textContent =
+    "🔊";
+
+  musicBtn.classList.add(
+    "playing"
+  );
+
 
   playMelody();
 
@@ -1099,21 +1916,42 @@ function startMusic(){
 
 function stopMusic(){
 
-  musicPlaying = false;
+  musicPlaying =
+    false;
+
 
   if(musicTimer){
-    clearTimeout(musicTimer);
+
+    clearTimeout(
+      musicTimer
+    );
+
   }
 
-  musicBtn.textContent = "🎵";
-  musicBtn.classList.remove("playing");
+
+  musicBtn.textContent =
+    "🎵";
+
+
+  musicBtn.classList.remove(
+    "playing"
+  );
 
 }
 
 
-function playTone(freq,duration){
+function playTone(
+  frequency,
+  duration
+){
 
-  if(!audioContext || !musicPlaying) return;
+  if(
+    !audioContext ||
+    !musicPlaying
+  ){
+    return;
+  }
+
 
   const oscillator =
     audioContext.createOscillator();
@@ -1121,31 +1959,47 @@ function playTone(freq,duration){
   const gain =
     audioContext.createGain();
 
-  oscillator.type = "sine";
 
-  oscillator.frequency.value = freq;
+  oscillator.type =
+    "sine";
+
+  oscillator.frequency.value =
+    frequency;
+
 
   gain.gain.setValueAtTime(
     0.0001,
     audioContext.currentTime
   );
 
+
   gain.gain.exponentialRampToValueAtTime(
     0.08,
     audioContext.currentTime + .03
   );
+
 
   gain.gain.exponentialRampToValueAtTime(
     0.0001,
     audioContext.currentTime + duration
   );
 
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
+
+  oscillator.connect(
+    gain
+  );
+
+  gain.connect(
+    audioContext.destination
+  );
+
 
   oscillator.start();
+
+
   oscillator.stop(
-    audioContext.currentTime + duration
+    audioContext.currentTime +
+    duration
   );
 
 }
@@ -1153,53 +2007,83 @@ function playTone(freq,duration){
 
 function playMelody(){
 
-  if(!musicPlaying) return;
+  if(!musicPlaying){
+    return;
+  }
+
 
   const notes = [
+
     261.63,
     329.63,
     392.00,
     329.63,
+
     293.66,
     349.23,
     440.00,
     392.00
+
   ];
 
-  let i = 0;
+
+  let i =
+    0;
+
 
   function next(){
 
-    if(!musicPlaying) return;
+    if(!musicPlaying){
+      return;
+    }
 
-    playTone(notes[i],.45);
 
-    i = (i + 1) % notes.length;
+    playTone(
+      notes[i],
+      .45
+    );
+
+
+    i =
+      (i + 1) %
+      notes.length;
+
 
     musicTimer =
-      setTimeout(next,520);
+      setTimeout(
+        next,
+        520
+      );
 
   }
+
 
   next();
 
 }
 
 
-musicBtn.addEventListener("click", () => {
+musicBtn.addEventListener(
+  "click",
+  function(){
 
-  if(musicPlaying){
-    stopMusic();
-  }else{
-    startMusic();
+    if(musicPlaying){
+
+      stopMusic();
+
+    }else{
+
+      startMusic();
+
+    }
+
   }
+);
 
-});
 
-
-document
-  .getElementById("surpriseBtn")
-  .addEventListener("click", () => {
+surpriseBtn.addEventListener(
+  "click",
+  function(){
 
     startMusic();
 
@@ -1208,49 +2092,65 @@ document
       window.innerHeight / 2
     );
 
-  });
+  }
+);
 
 
-/* =========================
+/* =================================
    IMAGE FALLBACK
-========================= */
+================================= */
 
-photo.addEventListener("error", () => {
+photo.addEventListener(
+  "error",
+  function(){
 
-  photo.src =
-    "data:image/svg+xml;charset=UTF-8," +
-    encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg"
-           width="600"
-           height="600"
-           viewBox="0 0 600 600">
+    photo.src =
+      "data:image/svg+xml;charset=UTF-8," +
+      encodeURIComponent(`
 
-        <rect width="600"
-              height="600"
-              fill="#18050d"/>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="600"
+          height="600"
+          viewBox="0 0 600 600">
 
-        <text x="50%"
-              y="48%"
-              dominant-baseline="middle"
-              text-anchor="middle"
-              fill="#ff668d"
-              font-size="80">
-          ❤️
-        </text>
+          <rect
+            width="600"
+            height="600"
+            fill="#18050d"
+          />
 
-        <text x="50%"
-              y="62%"
-              dominant-baseline="middle"
-              text-anchor="middle"
-              fill="#ffffff"
-              font-size="25">
-          Add image.jpg
-        </text>
+          <text
+            x="50%"
+            y="48%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            fill="#ff668d"
+            font-size="80">
 
-      </svg>
-    `);
+            ❤️
 
-});
+          </text>
+
+          <text
+            x="50%"
+            y="62%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            fill="#ffffff"
+            font-size="25">
+
+            Add image.jpg
+
+          </text>
+
+        </svg>
+
+      `);
+
+  }
+);
+
 </script>
 
 </body>
