@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For You</title>
+  <style>
+    :root{
+      --bg:#fff7f9;
+      --accent:#ff6b9a;
+      --muted:#6b6b6b;
+      --card:#ffffff;
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
+      --radius:14px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+    *{
+       font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#36000041);color:#15010126}
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+      box-sizing:border-box;
+    }
+    .card{
+      width:100%;
+      max-width:920px;
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:0;
+    }
+    @media(max-width:880px){
+      .card{grid-template-columns:1fr;max-width:720px}
+    }
+    .left{
+      padding:48px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      justify-content:center;
+    }
+    .title{
+      font-size:33px;
+      font-weight:900;
+      color:var(--accent);
+      letter-spacing:0.1px;
+    }
+    .subtitle{
+      font-size:18px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+    .message{
+      margin-top:12px;
+      font-size:16px;
+      line-height:1.6;
+      color:#333;
+    }
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      padding:12px 18px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(17, 0, 5, 0.797);
+      &:hover{
+        box-shadow:0 6px 18px rgba(17, 0, 5, 0.797);
+        background:#fff;
+        color:#ff6b9a;
+      }
+    }
+
+    .btn.ghost{
+      background:transparent;
+      color:var(--accent);
+      border:2px solid rgba(255,107,154,0.12);
+    
+        &:hover{
+        box-shadow:0 6px 18px rgba(17, 0, 5, 0.797);
+        background:#ff6b9a;
+        color: #fff;
+      }
+    }
+    .note{
+      margin-top:8px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    /* right column */
+    .right{
+      background:linear-gradient(180deg, rgba(255,107,154,0.06), rgba(255,107,154,0.02));
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+    }
+    .photo{
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background-size:cover;
+      background-position:center;
+      box-shadow:0 12px 30px rgba(0,0,0,0.08);
+      border:6px solid rgba(255,255,255,0.6);
+    }
+    .small{
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    /* heart animation */
+    .hearts{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      margin-top:6px;
+    }
+    .heart{
+      width:18px;height:18px;background:var(--accent);
+      transform:rotate(-45deg);
+      border-radius:4px 4px 0 0;
+      position:relative;
+      animation:beat 1.2s infinite;
+    }
+    .heart::before,.heart::after{
+      content:"";
+      position:absolute;
+      width:18px;height:18px;
+      background:var(--accent);
+      border-radius:50%;
+      top:-9px;
+      left:0;
+    }
+    .heart::after{left:9px}
+    @keyframes beat{
+      0%{transform:scale(1) rotate(-45deg)}
+      50%{transform:scale(1.18) rotate(-45deg)}
+      100%{transform:scale(1) rotate(-45deg)}
+    }
+
+    /* reveal note */
+    .hidden-note{
+      margin-top:12px;
+      padding:14px;
+      background:linear-gradient(90deg, rgba(255,107,154,0.06), rgba(255,107,154,0.02));
+      border-radius:10px;
+      display:none;
+      color:#333;
+      font-size:15px;
+    }
+
+    footer{
+      margin-top:18px;
+      font-size:18px;
+      color:var(--muted);
+      text-align:center;
+     
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-label="Romantic page">
+      <div class="left">
+        <div>
+          <div class="title">For the one who makes my heart smile</div>
+          <div class="subtitle">A little page I made just for you</div>
+        </div>
+
+        <div class="message">
+          Every day with you feels like a favorite song. I made this to remind you how much you mean to me — your laugh, your kindness, and the quiet moments we share.
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="revealBtn">Open my note</button>
+          <button class="btn ghost" id="surpriseBtn">Play a surprise</button>
+        </div>
+
+        <div class="note"></div>
+
+        <div class="hidden-note" id="note">
+          I love you more than words can hold. Thank you for being my partner, my friend, and my home. — <strong>RAY</strong>
+        </div>
+
+        <footer>For You PePe❤️</footer>
+      </div>
+
+      <div class="right">
+        <div class="photo" id="photo"
+          style="background-image:url(image.jpg);"
+          aria-label="Photo placeholder">
+        </div>
+
+        <div class="small">You are my favorite person</div>
+
+        <div class="hearts" aria-hidden="true">
+          <div class="heart" style="animation-delay:0s"></div>
+          <div class="heart" style="animation-delay:0.15s"></div>
+          <div class="heart" style="animation-delay:0.3s"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple interactivity: reveal note and optional audio
+    const revealBtn = document.getElementById('revealBtn');
+    const note = document.getElementById('note');
+    const surpriseBtn = document.getElementById('surpriseBtn');
+
+    revealBtn.addEventListener('click', () => {
+      note.style.display = note.style.display === 'block' ? 'none' : 'block';
+      revealBtn.textContent = note.style.display === 'block' ? 'Hide my note' : 'Open my note';
+    });
+
+    // Surprise plays a short built-in melody using WebAudio API (no external file)
+    surpriseBtn.addEventListener('click', async () => {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'sine';
+        o.frequency.value = 440;
+        o.connect(g);
+        g.connect(ctx.destination);
+        g.gain.value = 0;
+        const now = ctx.currentTime;
+        g.gain.linearRampToValueAtTime(0.12, now + 0.02);
+        o.start(now);
+        o.frequency.setValueAtTime(440, now);
+        o.frequency.linearRampToValueAtTime(660, now + 0.18);
+        o.frequency.linearRampToValueAtTime(550, now + 0.36);
+        g.gain.linearRampToValueAtTime(0.0, now + 1.2);
+        o.stop(now + 1.25);
+      } catch (e) {
+        alert('Audio not supported in this browser.');
+      }
+    });
+
+    // Optional: allow quick customization via URL params ?name=HerName&photo=URL
+    (function applyParams(){
+      const params = new URLSearchParams(location.search);
+      const name = params.get('name');
+      const photo = params.get('photo');
+      const customMsg = params.get('msg');
+      if(name){
+        document.querySelector('.title').textContent = `For ${name}, with love`;
+        document.querySelector('.small').textContent = `You are my favorite person, ${name}`;
+        document.getElementById('note').innerHTML = `I love you more than words can hold. Thank you for being my partner, my friend, and my home. — <strong>${'Abdulrasheed'}</strong>`;
+      }
+      if(photo){
+        document.getElementById('photo').style.backgroundImage = `url('${photo}')`;
+      }
+      if(customMsg){
+        document.querySelector('.message').innerHTML = customMsg;
+      }
+    })();
+  </script>
+</body>
+</html>
