@@ -1,1174 +1,673 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 
 <meta name="viewport"
       content="width=device-width,
-      initial-scale=1.0,
+      initial-scale=1,
+      maximum-scale=1,
       viewport-fit=cover">
 
-<meta name="theme-color" content="#080808">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#fff7f9">
 
 <title>For You ❤️</title>
 
 <style>
 
-/* =========================
+/* =========================================
    RESET
-========================= */
+========================================= */
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html,
 body{
-  width:100%;
-  min-height:100%;
+    width:100%;
+    min-height:100%;
 }
 
 body{
-  min-height:100svh;
-  overflow-x:hidden;
+    overflow-x:hidden;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-  color:#fff;
+    color:#333;
 
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      #3b0718 0%,
-      #12030a 42%,
-      #050505 100%
-    );
-}
-
-button{
-  border:0;
-  font:inherit;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.hidden{
-  display:none !important;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,107,154,.22),
+            transparent 42%
+        ),
+        linear-gradient(
+            180deg,
+            #fff7f9 0%,
+            #ffeef3 100%
+        );
 }
 
 
-/* =========================
-   SCREENS
-========================= */
+/* =========================================
+   PAGE
+========================================= */
 
-.screen{
-  width:100%;
-  min-height:100svh;
+.wrap{
+    width:100%;
+    min-height:100svh;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    padding:
+        max(16px, env(safe-area-inset-top))
+        12px
+        max(16px, env(safe-area-inset-bottom));
 
-  padding:
-    max(18px,env(safe-area-inset-top))
-    14px
-    max(18px,env(safe-area-inset-bottom));
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 
-/* =========================
-   INTRO
-========================= */
-
-#intro{
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.intro-content{
-  width:100%;
-  max-width:390px;
-
-  animation:fadeUp .8s ease both;
-}
-
-.intro-heart{
-  width:76px;
-  height:76px;
-
-  margin:0 auto 22px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:rgba(255,35,95,.12);
-
-  border:1px solid rgba(255,90,130,.25);
-
-  font-size:36px;
-
-  animation:pulse 2s infinite;
-
-  box-shadow:
-    0 0 40px rgba(255,30,90,.2);
-}
-
-.intro-content h1{
-  font-size:clamp(30px,8vw,50px);
-  line-height:1.06;
-
-  margin-bottom:14px;
-}
-
-.intro-content p{
-  color:#d8c4ca;
-
-  font-size:15px;
-  line-height:1.6;
-
-  margin-bottom:25px;
-}
-
-.primary-btn{
-  width:100%;
-  max-width:320px;
-
-  min-height:53px;
-
-  padding:14px 20px;
-
-  border-radius:999px;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff286b,
-      #ff557f
-    );
-
-  box-shadow:
-    0 12px 35px rgba(255,30,90,.25);
-
-  font-weight:700;
-
-  transition:.25s ease;
-}
-
-.primary-btn:active{
-  transform:scale(.96);
-}
-
-
-/* =========================
-   ENVELOPE
-========================= */
-
-#envelopeScreen{
-  background:
-    radial-gradient(
-      circle at center,
-      #2d0715 0%,
-      #080808 65%
-    );
-}
-
-.envelope-wrap{
-  width:100%;
-  max-width:390px;
-  text-align:center;
-}
-
-.envelope-title{
-  font-size:24px;
-  line-height:1.2;
-
-  margin-bottom:28px;
-}
-
-.envelope{
-  position:relative;
-
-  width:min(84vw,330px);
-  height:min(53vw,205px);
-
-  min-height:165px;
-
-  margin:auto;
-
-  perspective:900px;
-
-  cursor:pointer;
-}
-
-.env-body{
-  position:absolute;
-  inset:0;
-
-  border-radius:12px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ff416f,
-      #bd123f
-    );
-
-  box-shadow:
-    0 25px 70px rgba(255,20,80,.3);
-
-  overflow:hidden;
-}
-
-.env-body::before,
-.env-body::after{
-  content:"";
-
-  position:absolute;
-  bottom:0;
-
-  width:70%;
-  height:100%;
-
-  background:rgba(100,0,25,.2);
-}
-
-.env-body::before{
-  left:0;
-
-  clip-path:
-    polygon(
-      0 0,
-      100% 100%,
-      0 100%
-    );
-}
-
-.env-body::after{
-  right:0;
-
-  clip-path:
-    polygon(
-      100% 0,
-      100% 100%,
-      0 100%
-    );
-}
-
-.flap{
-  position:absolute;
-
-  z-index:3;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:60%;
-
-  background:#ff557d;
-
-  clip-path:
-    polygon(
-      0 0,
-      100% 0,
-      50% 100%
-    );
-
-  transform-origin:top;
-
-  transition:
-    transform .8s
-    cubic-bezier(.2,.8,.2,1);
-}
-
-.letter{
-  position:absolute;
-
-  z-index:2;
-
-  left:8%;
-
-  width:84%;
-  height:80%;
-
-  bottom:5%;
-
-  border-radius:8px;
-
-  background:#fff7fa;
-
-  color:#3a1420;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:34px;
-
-  transition:
-    transform 1s
-    cubic-bezier(.2,.8,.2,1);
-}
-
-.envelope.open .flap{
-  transform:rotateX(180deg);
-}
-
-.envelope.open .letter{
-  transform:translateY(-70px);
-}
-
-.tap-text{
-  margin-top:28px;
-
-  color:#cdb7bf;
-
-  font-size:14px;
-
-  animation:pulse 1.8s infinite;
-}
-
-
-/* =========================
-   MAIN SCREEN
-========================= */
-
-#mainScreen{
-  display:block;
-
-  padding:
-    max(12px,env(safe-area-inset-top))
-    12px
-    max(75px,env(safe-area-inset-bottom));
-}
-
-
-/*
-  IMPORTANT:
-  The inner wrap must NOT have
-  min-height:100svh.
-*/
-
-#mainScreen > .wrap{
-  width:100%;
-  max-width:960px;
-
-  min-height:0;
-
-  margin:0 auto;
-
-  padding:0;
-}
-
-
-/* =========================
+/* =========================================
    CARD
-========================= */
+========================================= */
 
 .card{
-  width:100%;
+    width:100%;
+    max-width:960px;
 
-  background:
-    rgba(18,18,20,.94);
+    background:#fff;
 
-  border:
-    1px solid
-    rgba(255,255,255,.09);
+    border-radius:20px;
 
-  border-radius:20px;
+    overflow:hidden;
 
-  overflow:hidden;
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.10);
 
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.55),
-    0 0 50px rgba(255,20,80,.07);
-
-  backdrop-filter:blur(15px);
+    display:flex;
+    flex-direction:column;
 }
 
 
-/* =========================
-   CONTENT
-========================= */
+/* =========================================
+   TEXT SECTION
+========================================= */
 
-.content{
-  padding:
-    22px
-    17px
-    18px;
+.left{
+    width:100%;
 
-  text-align:center;
-}
+    padding:
+        28px
+        20px
+        24px;
 
-.badge{
-  display:inline-flex;
+    display:flex;
+    flex-direction:column;
 
-  align-items:center;
-  justify-content:center;
-
-  gap:6px;
-
-  padding:
-    6px
-    11px;
-
-  border-radius:999px;
-
-  background:
-    rgba(255,50,100,.10);
-
-  border:
-    1px solid
-    rgba(255,80,120,.16);
-
-  color:#ff9eb7;
-
-  font-size:11px;
-
-  margin-bottom:15px;
+    gap:16px;
 }
 
 .title{
-  width:100%;
+    width:100%;
 
-  font-size:
-    clamp(
-      27px,
-      8vw,
-      52px
-    );
+    font-size:30px;
+    line-height:1.12;
 
-  line-height:1.08;
+    font-weight:900;
 
-  letter-spacing:-1px;
+    color:#ff6b9a;
 
-  margin-bottom:10px;
+    letter-spacing:-.5px;
 
-  overflow-wrap:anywhere;
+    text-align:center;
 }
 
 .subtitle{
-  color:#bfaeb4;
+    margin-top:8px;
 
-  font-size:13px;
+    font-size:15px;
 
-  line-height:1.5;
+    line-height:1.5;
 
-  margin-bottom:17px;
-}
+    color:#777;
 
-
-/* =========================
-   TYPING MESSAGE
-========================= */
-
-.message-box{
-  width:100%;
-
-  min-height:85px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    4px
-    0;
+    text-align:center;
 }
 
 .message{
-  width:100%;
-  max-width:560px;
+    width:100%;
 
-  color:#f4e9ec;
+    margin-top:3px;
 
-  font-size:15px;
+    font-size:16px;
 
-  line-height:1.65;
+    line-height:1.7;
 
-  overflow-wrap:anywhere;
-}
+    color:#333;
 
-.cursor{
-  display:inline-block;
+    text-align:center;
 
-  width:2px;
-  height:16px;
-
-  margin-left:3px;
-
-  vertical-align:-2px;
-
-  background:#ff4775;
-
-  animation:blink .8s infinite;
+    overflow-wrap:anywhere;
 }
 
 
-/* =========================
-   PHOTO
-========================= */
+/* =========================================
+   BUTTONS
+========================================= */
 
-.photo-section{
-  width:100%;
+.actions{
+    width:100%;
 
-  padding:
-    4px
-    18px
-    20px;
+    display:grid;
+    grid-template-columns:1fr;
 
-  display:flex;
-  justify-content:center;
+    gap:10px;
+
+    margin-top:4px;
+}
+
+.btn{
+    width:100%;
+
+    min-height:50px;
+
+    padding:13px 16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#ff6b9a;
+
+    color:#fff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 18px rgba(255,107,154,.25);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease;
+}
+
+.btn:active{
+    transform:scale(.97);
+}
+
+.btn.ghost{
+    background:#fff;
+
+    color:#ff6b9a;
+
+    border:2px solid #ffd2df;
+
+    box-shadow:none;
+}
+
+.btn.ghost:active{
+    background:#ff6b9a;
+    color:#fff;
+}
+
+
+/* =========================================
+   LOVE NOTE
+========================================= */
+
+.hidden-note{
+    display:none;
+
+    width:100%;
+
+    padding:16px;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,107,154,.11),
+            rgba(255,107,154,.035)
+        );
+
+    color:#444;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    animation:noteIn .35s ease;
+}
+
+.hidden-note.show{
+    display:block;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+    width:100%;
+
+    margin-top:1px;
+
+    text-align:center;
+
+    font-size:16px;
+
+    color:#777;
+}
+
+
+/* =========================================
+   PHOTO SECTION
+========================================= */
+
+.right{
+    width:100%;
+
+    padding:
+        25px
+        20px
+        30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,107,154,.07),
+            rgba(255,107,154,.02)
+        );
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:13px;
 }
 
 .photo{
-  width:
-    min(
-      58vw,
-      205px
-    );
+    width:
+        min(
+            62vw,
+            215px
+        );
 
-  aspect-ratio:1/1;
+    aspect-ratio:1/1;
 
-  border-radius:50%;
+    border-radius:50%;
 
-  overflow:hidden;
+    background-image:url("image.jpg");
 
-  background:
-    linear-gradient(
-      135deg,
-      #250711,
-      #090909
-    );
+    background-size:cover;
 
-  border:
-    5px solid
-    rgba(255,255,255,.92);
+    background-position:center;
 
-  box-shadow:
-    0 18px 45px rgba(0,0,0,.45);
+    background-repeat:no-repeat;
 
-  flex-shrink:0;
+    border:6px solid #fff;
 
-  animation:
-    photoFloat 4s ease-in-out infinite;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.13);
+
+    flex-shrink:0;
+
+    animation:photoFloat 4s ease-in-out infinite;
 }
 
-.photo img{
-  width:100%;
-  height:100%;
+.small{
+    font-size:14px;
 
-  display:block;
+    color:#777;
 
-  object-fit:cover;
+    text-align:center;
+
+    line-height:1.5;
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
-
-.actions{
-  width:100%;
-
-  display:flex;
-  flex-direction:column;
-
-  gap:9px;
-
-  padding:
-    0
-    17px;
-}
-
-.action-btn{
-  width:100%;
-
-  min-height:49px;
-
-  padding:
-    12px
-    16px;
-
-  border-radius:13px;
-
-  color:#fff;
-
-  background:#222225;
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
-  font-size:14px;
-
-  transition:
-    transform .2s ease,
-    background .2s ease;
-}
-
-.action-btn.primary{
-  background:
-    linear-gradient(
-      135deg,
-      #ff286b,
-      #d91650
-    );
-
-  border:0;
-}
-
-.action-btn:active{
-  transform:scale(.97);
-}
-
-
-/* =========================
-   NOTE
-========================= */
-
-.note{
-  width:
-    calc(100% - 34px);
-
-  margin:
-    17px
-    auto
-    0;
-
-  padding:
-    16px;
-
-  border-radius:15px;
-
-  background:
-    rgba(255,255,255,.035);
-
-  border:
-    1px solid
-    rgba(255,255,255,.07);
-
-  text-align:left;
-
-  animation:
-    noteIn .45s ease both;
-}
-
-.note h3{
-  color:#ff7295;
-
-  font-size:15px;
-
-  margin-bottom:8px;
-}
-
-.note p{
-  color:#d6c8cc;
-
-  font-size:13px;
-
-  line-height:1.7;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-  text-align:center;
-
-  padding:
-    19px
-    12px
-    5px;
-
-  color:#806f75;
-
-  font-size:11px;
-}
-
-
-/* =========================
-   MUSIC BUTTON
-========================= */
-
-.music-btn{
-  position:fixed;
-
-  z-index:100;
-
-  right:15px;
-
-  bottom:
-    max(
-      15px,
-      env(safe-area-inset-bottom)
-    );
-
-  width:50px;
-  height:50px;
-
-  border-radius:50%;
-
-  color:#fff;
-
-  background:
-    rgba(255,35,90,.94);
-
-  box-shadow:
-    0 10px 35px
-    rgba(255,20,80,.3);
-
-  font-size:19px;
-}
-
-.music-btn.playing{
-  animation:
-    musicPulse 1.2s infinite;
-}
-
-
-/* =========================
-   FLOATING HEARTS
-========================= */
+/* =========================================
+   HEARTS
+========================================= */
 
 .hearts{
-  position:fixed;
+    display:flex;
 
-  inset:0;
+    justify-content:center;
+    align-items:center;
 
-  z-index:1;
+    gap:9px;
 
-  pointer-events:none;
-
-  overflow:hidden;
+    margin-top:2px;
 }
 
 .heart{
-  position:absolute;
+    position:relative;
 
-  bottom:-30px;
+    width:16px;
+    height:16px;
 
-  color:#ff4775;
+    background:#ff6b9a;
 
-  opacity:0;
+    transform:rotate(-45deg);
 
-  animation:
-    floatHeart
-    linear
-    forwards;
+    border-radius:
+        4px 4px 0 0;
+
+    animation:beat 1.2s infinite;
+}
+
+.heart::before,
+.heart::after{
+    content:"";
+
+    position:absolute;
+
+    width:16px;
+    height:16px;
+
+    background:#ff6b9a;
+
+    border-radius:50%;
+}
+
+.heart::before{
+    top:-8px;
+    left:0;
+}
+
+.heart::after{
+    top:0;
+    left:8px;
 }
 
 
-/* =========================
-   BURST HEARTS
-========================= */
+/* =========================================
+   SMALL PHONES
+========================================= */
 
-.burst-heart{
-  position:fixed;
+@media(max-width:380px){
 
-  z-index:999;
+    .wrap{
+        padding-left:9px;
+        padding-right:9px;
+    }
 
-  pointer-events:none;
+    .card{
+        border-radius:16px;
+    }
 
-  font-size:20px;
+    .left{
+        padding:
+            24px
+            16px
+            20px;
+    }
 
-  animation:
-    burst
-    1s
-    ease-out
-    forwards;
+    .title{
+        font-size:27px;
+    }
+
+    .subtitle{
+        font-size:14px;
+    }
+
+    .message{
+        font-size:15px;
+        line-height:1.65;
+    }
+
+    .btn{
+        min-height:48px;
+        font-size:14px;
+    }
+
+    .right{
+        padding:
+            22px
+            16px
+            25px;
+    }
+
+    .photo{
+        width:185px;
+    }
+
+    footer{
+        font-size:15px;
+    }
 }
 
 
-/* =========================
-   TABLETS
-========================= */
+/* =========================================
+   LANDSCAPE PHONES
+========================================= */
+
+@media(
+    max-height:520px
+) and (
+    orientation:landscape
+){
+
+    .wrap{
+        align-items:flex-start;
+
+        padding-top:12px;
+        padding-bottom:12px;
+    }
+
+    .card{
+        flex-direction:row;
+    }
+
+    .left{
+        width:65%;
+        padding:20px;
+    }
+
+    .right{
+        width:35%;
+        padding:20px 10px;
+    }
+
+    .photo{
+        width:140px;
+    }
+
+    .title{
+        font-size:25px;
+    }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
 
 @media(min-width:600px){
 
-  .content{
-    padding:
-      30px
-      25px
-      25px;
-  }
+    .wrap{
+        padding:
+            30px
+            20px;
+    }
 
-  .title{
-    font-size:40px;
-  }
+    .card{
+        max-width:720px;
+    }
 
-  .message{
-    font-size:16px;
-  }
+    .left{
+        padding:38px;
+    }
 
-  .photo{
-    width:240px;
-  }
+    .title{
+        font-size:38px;
+    }
 
-  .actions{
-    flex-direction:row;
-  }
+    .message{
+        font-size:17px;
+    }
 
-  .action-btn{
-    width:auto;
-    flex:1;
-  }
+    .actions{
+        grid-template-columns:
+            1fr 1fr;
+    }
 
+    .right{
+        padding:35px;
+    }
+
+    .photo{
+        width:240px;
+    }
 }
 
 
-/* =========================
+/* =========================================
    DESKTOP
-========================= */
+========================================= */
 
-@media(min-width:800px){
+@media(min-width:900px){
 
-  #mainScreen{
-    display:flex;
+    .wrap{
+        padding:40px 25px;
+    }
 
-    align-items:center;
-    justify-content:center;
+    .card{
+        max-width:960px;
 
-    padding:40px;
-  }
+        display:grid;
 
-  .card{
-    display:grid;
+        grid-template-columns:
+            minmax(0,1fr)
+            380px;
+    }
 
-    grid-template-columns:
-      minmax(0,1fr)
-      330px;
+    .left{
+        padding:52px;
+    }
 
-    gap:35px;
+    .title{
+        font-size:44px;
+        text-align:left;
+    }
 
-    padding:38px;
-  }
+    .subtitle{
+        text-align:left;
+        font-size:18px;
+    }
 
-  .content{
-    padding:0;
+    .message{
+        text-align:left;
+        font-size:17px;
+    }
 
-    text-align:left;
-  }
+    .actions{
+        display:flex;
+        flex-wrap:wrap;
+    }
 
-  .badge{
-    margin-bottom:18px;
-  }
+    .btn{
+        width:auto;
+        min-width:145px;
+    }
 
-  .title{
-    font-size:46px;
-  }
+    .right{
+        min-height:560px;
+        padding:40px;
+    }
 
-  .subtitle{
-    font-size:14px;
-
-    text-align:left;
-  }
-
-  .message-box{
-    justify-content:flex-start;
-
-    min-height:105px;
-  }
-
-  .message{
-    font-size:17px;
-  }
-
-  .photo-section{
-    padding:0;
-
-    align-items:center;
-  }
-
-  .photo{
-    max-width:330px;
-  }
-
-  .actions{
-    flex-direction:row;
-
-    padding:0;
-
-    margin-top:20px;
-  }
-
-  .action-btn{
-    width:auto;
-  }
-
-  .note{
-    width:100%;
-
-    margin:
-      20px
-      0
-      0;
-  }
-
-  .footer{
-    text-align:left;
-  }
-
+    .photo{
+        width:280px;
+    }
 }
 
 
-/* =========================
-   VERY SMALL PHONES
-========================= */
-
-@media(max-width:360px){
-
-  #mainScreen{
-    padding-left:8px;
-    padding-right:8px;
-  }
-
-  .card{
-    border-radius:16px;
-  }
-
-  .content{
-    padding:
-      20px
-      14px
-      15px;
-  }
-
-  .title{
-    font-size:25px;
-  }
-
-  .subtitle{
-    font-size:12px;
-  }
-
-  .message{
-    font-size:14px;
-  }
-
-  .message-box{
-    min-height:78px;
-  }
-
-  .photo-section{
-    padding-bottom:18px;
-  }
-
-  .photo{
-    width:175px;
-  }
-
-  .actions{
-    padding:
-      0
-      14px;
-  }
-
-  .action-btn{
-    min-height:47px;
-    font-size:13px;
-  }
-
-  .note{
-    width:
-      calc(100% - 28px);
-
-    margin-top:14px;
-  }
-
-}
-
-
-/* =========================
-   SHORT PHONE
-========================= */
-
-@media(
-  max-height:650px
-) and (
-  max-width:600px
-){
-
-  .content{
-    padding-top:17px;
-  }
-
-  .badge{
-    margin-bottom:10px;
-  }
-
-  .title{
-    font-size:25px;
-    margin-bottom:7px;
-  }
-
-  .subtitle{
-    margin-bottom:10px;
-  }
-
-  .message-box{
-    min-height:65px;
-  }
-
-  .photo{
-    width:155px;
-  }
-
-  .photo-section{
-    padding-bottom:14px;
-  }
-
-  .footer{
-    padding-top:13px;
-  }
-
-}
-
-
-/* =========================
+/* =========================================
    ANIMATIONS
-========================= */
-
-@keyframes fadeUp{
-
-  from{
-    opacity:0;
-    transform:translateY(25px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-}
-
-@keyframes pulse{
-
-  0%,
-  100%{
-    transform:scale(1);
-  }
-
-  50%{
-    transform:scale(1.06);
-  }
-
-}
-
-@keyframes blink{
-
-  50%{
-    opacity:0;
-  }
-
-}
+========================================= */
 
 @keyframes noteIn{
 
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
+    from{
+        opacity:0;
+        transform:translateY(-8px);
+    }
 
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-@keyframes floatHeart{
+@keyframes photoFloat{
 
-  0%{
-    transform:
-      translateY(0)
-      rotate(0);
+    0%,
+    100%{
+        transform:translateY(0);
+    }
 
-    opacity:0;
-  }
-
-  10%{
-    opacity:.8;
-  }
-
-  100%{
-    transform:
-      translateY(-110vh)
-      rotate(360deg);
-
-    opacity:0;
-  }
-
+    50%{
+        transform:translateY(-7px);
+    }
 }
 
-@keyframes musicPulse{
+@keyframes beat{
 
-  50%{
-    transform:scale(1.08);
+    0%{
+        transform:
+            scale(1)
+            rotate(-45deg);
+    }
 
-    box-shadow:
-      0 0 35px
-      rgba(255,40,100,.6);
-  }
+    50%{
+        transform:
+            scale(1.17)
+            rotate(-45deg);
+    }
 
-}
-
-@keyframes burst{
-
-  0%{
-    transform:
-      translate(-50%,-50%)
-      scale(.5);
-
-    opacity:1;
-  }
-
-  100%{
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        calc(-50% + var(--y))
-      )
-      scale(1.4)
-      rotate(180deg);
-
-    opacity:0;
-  }
-
+    100%{
+        transform:
+            scale(1)
+            rotate(-45deg);
+    }
 }
 
 
-/* =========================
-   REDUCED MOTION
-========================= */
+/* =========================================
+   ACCESSIBILITY
+========================================= */
 
 @media(prefers-reduced-motion:reduce){
 
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-
-    animation-iteration-count:1 !important;
-
-    transition:none !important;
-  }
-
+    *,
+    *::before,
+    *::after{
+        animation:none !important;
+        transition:none !important;
+    }
 }
 
 </style>
@@ -1177,979 +676,387 @@ button{
 
 <body>
 
+<div class="wrap">
 
-<!-- FLOATING HEARTS -->
+    <main
+        class="card"
+        role="main"
+        aria-label="Romantic page"
+    >
 
-<div
-  class="hearts"
-  id="hearts">
+        <!-- =========================
+             LEFT
+        ========================== -->
+
+        <section class="left">
+
+            <div>
+
+                <div
+                    class="title"
+                    id="title"
+                >
+                    For the one who makes my heart smile
+                </div>
+
+                <div class="subtitle">
+                    A little page I made just for you
+                </div>
+
+            </div>
+
+
+            <div
+                class="message"
+                id="message"
+            >
+                Every day with you feels like a favorite song.
+                I made this to remind you how much you mean to me —
+                your laugh, your kindness, and the quiet moments we share.
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="btn"
+                    id="revealBtn"
+                >
+                    Open my note 💌
+                </button>
+
+                <button
+                    class="btn ghost"
+                    id="surpriseBtn"
+                >
+                    Play a surprise 🎵
+                </button>
+
+            </div>
+
+
+            <div
+                class="hidden-note"
+                id="note"
+            >
+                I love you more than words can hold.
+                Thank you for being my partner, my friend,
+                and my home. —
+                <strong>RAY</strong>
+            </div>
+
+
+            <footer>
+                For You <span id="footerName">PePe</span> ❤️
+            </footer>
+
+        </section>
+
+
+        <!-- =========================
+             RIGHT
+        ========================== -->
+
+        <section class="right">
+
+            <div
+                class="photo"
+                id="photo"
+                aria-label="Photo"
+            ></div>
+
+
+            <div
+                class="small"
+                id="smallText"
+            >
+                You are my favorite person
+            </div>
+
+
+            <div
+                class="hearts"
+                aria-hidden="true"
+            >
+
+                <div
+                    class="heart"
+                    style="animation-delay:0s"
+                ></div>
+
+                <div
+                    class="heart"
+                    style="animation-delay:.15s"
+                ></div>
+
+                <div
+                    class="heart"
+                    style="animation-delay:.3s"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </div>
-
-
-<!-- =================================
-     INTRO
-================================= -->
-
-<section
-  class="screen"
-  id="intro">
-
-  <div class="intro-content">
-
-    <div class="intro-heart">
-      ❤️
-    </div>
-
-    <h1>
-      Someone left you<br>
-      a surprise...
-    </h1>
-
-    <p>
-      There is a little something here
-      made especially for you.
-    </p>
-
-    <button
-      class="primary-btn"
-      id="openBtn">
-
-      Open Surprise 💌
-
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- =================================
-     ENVELOPE
-================================= -->
-
-<section
-  class="screen hidden"
-  id="envelopeScreen">
-
-  <div class="envelope-wrap">
-
-    <h2 class="envelope-title">
-      You have a love letter 💕
-    </h2>
-
-    <div
-      class="envelope"
-      id="envelope">
-
-      <div class="env-body"></div>
-
-      <div class="letter">
-        💌
-      </div>
-
-      <div class="flap"></div>
-
-    </div>
-
-    <p class="tap-text">
-      Tap the envelope to open it
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =================================
-     MAIN PAGE
-================================= -->
-
-<section
-  class="screen hidden"
-  id="mainScreen">
-
-  <div class="wrap">
-
-    <div class="card">
-
-
-      <!-- CONTENT -->
-
-      <div>
-
-        <div class="content">
-
-          <div class="badge">
-            ❤️ Made with love
-          </div>
-
-
-          <h1
-            class="title"
-            id="title">
-
-            For the one who makes
-            my heart smile
-
-          </h1>
-
-
-          <p class="subtitle">
-
-            Some people are special...
-            and then there is you.
-
-          </p>
-
-
-          <div class="message-box">
-
-            <p class="message">
-
-              <span id="typing"></span>
-
-              <span class="cursor"></span>
-
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <!-- BUTTONS -->
-
-        <div class="actions">
-
-          <button
-            class="action-btn primary"
-            id="noteBtn">
-
-            Open my note 💌
-
-          </button>
-
-
-          <button
-            class="action-btn"
-            id="surpriseBtn">
-
-            Play a surprise 🎵
-
-          </button>
-
-        </div>
-
-
-        <!-- NOTE -->
-
-        <div
-          class="note hidden"
-          id="note">
-
-          <h3>
-            A little note for you ❤️
-          </h3>
-
-          <p id="noteText">
-
-            I don't always know the
-            perfect words, but I hope you
-            know just how special you are
-            to me. Every moment with you
-            is something I treasure.
-
-          </p>
-
-        </div>
-
-
-        <!-- FOOTER -->
-
-        <div class="footer">
-
-          For You
-          <span id="footerName">
-            PePe
-          </span>
-          ❤️
-
-        </div>
-
-      </div>
-
-
-      <!-- PHOTO -->
-
-      <div class="photo-section">
-
-        <div class="photo">
-
-          <img
-            id="photo"
-            src="image.jpg"
-            alt="A special photo">
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- MUSIC BUTTON -->
-
-<button
-  class="music-btn hidden"
-  id="musicBtn"
-  aria-label="Play or pause music">
-
-  🎵
-
-</button>
 
 
 <script>
 
-/* =================================
-   URL PARAMETERS
-================================= */
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const nameParam =
-  params.get("name");
-
-const customMsg =
-  params.get("msg");
-
-const photoParam =
-  params.get("photo");
-
-
-const defaultMessage =
-  "You make ordinary moments feel special, " +
-  "and somehow you always manage to put " +
-  "a smile on my face.";
-
-
-let message =
-  customMsg || defaultMessage;
-
-
-/* =================================
+/* =========================================
    ELEMENTS
-================================= */
+========================================= */
 
-const intro =
-  document.getElementById("intro");
-
-const envelopeScreen =
-  document.getElementById(
-    "envelopeScreen"
-  );
-
-const mainScreen =
-  document.getElementById(
-    "mainScreen"
-  );
-
-const openBtn =
-  document.getElementById(
-    "openBtn"
-  );
-
-const envelope =
-  document.getElementById(
-    "envelope"
-  );
-
-const title =
-  document.getElementById(
-    "title"
-  );
-
-const footerName =
-  document.getElementById(
-    "footerName"
-  );
-
-const photo =
-  document.getElementById(
-    "photo"
-  );
-
-const typing =
-  document.getElementById(
-    "typing"
-  );
-
-const noteText =
-  document.getElementById(
-    "noteText"
-  );
-
-const smallText =
-  document.getElementById(
-    "smallText"
-  );
-
-const note =
-  document.getElementById(
-    "note"
-  );
-
-const noteBtn =
-  document.getElementById(
-    "noteBtn"
-  );
+const revealBtn =
+    document.getElementById("revealBtn");
 
 const surpriseBtn =
-  document.getElementById(
-    "surpriseBtn"
-  );
+    document.getElementById("surpriseBtn");
 
-const musicBtn =
-  document.getElementById(
-    "musicBtn"
-  );
+const note =
+    document.getElementById("note");
 
-const hearts =
-  document.getElementById(
-    "hearts"
-  );
+const title =
+    document.getElementById("title");
 
+const message =
+    document.getElementById("message");
 
-/* =================================
-   APPLY URL DATA
-================================= */
+const photo =
+    document.getElementById("photo");
 
-if(nameParam){
+const smallText =
+    document.getElementById("smallText");
 
-  const cleanName =
-    nameParam.trim();
+const footerName =
+    document.getElementById("footerName");
 
-  title.textContent =
-    `For ${cleanName}, the one who makes my heart smile`;
 
-  footerName.textContent =
-    cleanName;
+/* =========================================
+   NOTE REVEAL
+========================================= */
 
-}
-
-if(customMsg){
-
-  noteText.textContent =
-    customMsg;
-
-}
-
-if(photoParam){
-
-  photo.src =
-    photoParam;
-
-}
-
-
-/* =================================
-   OPEN SURPRISE
-================================= */
-
-openBtn.addEventListener(
-  "click",
-  function(){
-
-    intro.classList.add(
-      "hidden"
-    );
-
-    envelopeScreen.classList.remove(
-      "hidden"
-    );
-
-  }
-);
-
-
-/* =================================
-   OPEN ENVELOPE
-================================= */
-
-envelope.addEventListener(
-  "click",
-  function(){
-
-    if(
-      envelope.classList.contains(
-        "open"
-      )
-    ){
-      return;
-    }
-
-
-    envelope.classList.add(
-      "open"
-    );
-
-
-    setTimeout(
-      function(){
-
-        envelopeScreen.classList.add(
-          "hidden"
-        );
-
-        mainScreen.classList.remove(
-          "hidden"
-        );
-
-        musicBtn.classList.remove(
-          "hidden"
-        );
-
-        startTyping();
-
-        createHearts();
-
-      },
-      1100
-    );
-
-  }
-);
-
-
-/* =================================
-   TYPING EFFECT
-================================= */
-
-let typingStarted =
-  false;
-
-function startTyping(){
-
-  if(typingStarted){
-    return;
-  }
-
-  typingStarted =
-    true;
-
-  typing.textContent =
-    "";
-
-  let index =
-    0;
-
-
-  function type(){
-
-    if(index < message.length){
-
-      typing.textContent +=
-        message.charAt(index);
-
-      index++;
-
-      setTimeout(
-        type,
-        32
-      );
-
-    }
-
-  }
-
-  type();
-
-}
-
-
-/* =================================
-   LOVE NOTE
-================================= */
-
-noteBtn.addEventListener(
-  "click",
-  function(){
-
-    note.classList.toggle(
-      "hidden"
-    );
-
-
-    if(
-      !note.classList.contains(
-        "hidden"
-      )
-    ){
-
-      noteBtn.textContent =
-        "Close my note 💕";
-
-      heartBurst(
-        window.innerWidth / 2,
-        window.innerHeight / 2
-      );
-
-    }else{
-
-      noteBtn.textContent =
-        "Open my note 💌";
-
-    }
-
-  }
-);
-
-
-/* =================================
-   FLOATING HEARTS
-================================= */
-
-function createHearts(){
-
-  setInterval(
+revealBtn.addEventListener(
+    "click",
     function(){
 
-      const heart =
-        document.createElement(
-          "div"
-        );
+        const isOpen =
+            note.classList.toggle("show");
 
-      heart.className =
-        "heart";
+        if(isOpen){
 
-      heart.textContent =
-        Math.random() > .5
-          ? "❤"
-          : "♡";
+            revealBtn.textContent =
+                "Hide my note ❤️";
 
+        }else{
 
-      heart.style.left =
-        Math.random() * 100 + "%";
+            revealBtn.textContent =
+                "Open my note 💌";
 
-
-      heart.style.fontSize =
-        (
-          12 +
-          Math.random() * 18
-        ) + "px";
-
-
-      heart.style.animationDuration =
-        (
-          5 +
-          Math.random() * 5
-        ) + "s";
-
-
-      hearts.appendChild(
-        heart
-      );
-
-
-      setTimeout(
-        function(){
-
-          heart.remove();
-
-        },
-        10000
-      );
-
-    },
-    700
-  );
-
-}
-
-
-/* =================================
-   HEART BURST
-================================= */
-
-function heartBurst(x,y){
-
-  for(
-    let i = 0;
-    i < 18;
-    i++
-  ){
-
-    const heart =
-      document.createElement(
-        "div"
-      );
-
-    heart.className =
-      "burst-heart";
-
-    heart.textContent =
-      Math.random() > .5
-        ? "❤️"
-        : "💕";
-
-
-    heart.style.left =
-      x + "px";
-
-    heart.style.top =
-      y + "px";
-
-
-    const angle =
-      Math.random() *
-      Math.PI *
-      2;
-
-
-    const distance =
-      70 +
-      Math.random() *
-      150;
-
-
-    heart.style.setProperty(
-      "--x",
-      Math.cos(angle) *
-      distance +
-      "px"
-    );
-
-
-    heart.style.setProperty(
-      "--y",
-      Math.sin(angle) *
-      distance +
-      "px"
-    );
-
-
-    document.body.appendChild(
-      heart
-    );
-
-
-    setTimeout(
-      function(){
-
-        heart.remove();
-
-      },
-      1000
-    );
-
-  }
-
-}
-
-
-/* =================================
-   MUSIC
-================================= */
-
-let audioContext =
-  null;
-
-let musicPlaying =
-  false;
-
-let musicTimer =
-  null;
-
-
-function startMusic(){
-
-  if(!audioContext){
-
-    audioContext =
-      new (
-        window.AudioContext ||
-        window.webkitAudioContext
-      )();
-
-  }
-
-
-  if(
-    audioContext.state ===
-    "suspended"
-  ){
-
-    audioContext.resume();
-
-  }
-
-
-  if(musicPlaying){
-    return;
-  }
-
-
-  musicPlaying =
-    true;
-
-
-  musicBtn.textContent =
-    "🔊";
-
-  musicBtn.classList.add(
-    "playing"
-  );
-
-
-  playMelody();
-
-}
-
-
-function stopMusic(){
-
-  musicPlaying =
-    false;
-
-
-  if(musicTimer){
-
-    clearTimeout(
-      musicTimer
-    );
-
-  }
-
-
-  musicBtn.textContent =
-    "🎵";
-
-
-  musicBtn.classList.remove(
-    "playing"
-  );
-
-}
-
-
-function playTone(
-  frequency,
-  duration
-){
-
-  if(
-    !audioContext ||
-    !musicPlaying
-  ){
-    return;
-  }
-
-
-  const oscillator =
-    audioContext.createOscillator();
-
-  const gain =
-    audioContext.createGain();
-
-
-  oscillator.type =
-    "sine";
-
-  oscillator.frequency.value =
-    frequency;
-
-
-  gain.gain.setValueAtTime(
-    0.0001,
-    audioContext.currentTime
-  );
-
-
-  gain.gain.exponentialRampToValueAtTime(
-    0.08,
-    audioContext.currentTime + .03
-  );
-
-
-  gain.gain.exponentialRampToValueAtTime(
-    0.0001,
-    audioContext.currentTime + duration
-  );
-
-
-  oscillator.connect(
-    gain
-  );
-
-  gain.connect(
-    audioContext.destination
-  );
-
-
-  oscillator.start();
-
-
-  oscillator.stop(
-    audioContext.currentTime +
-    duration
-  );
-
-}
-
-
-function playMelody(){
-
-  if(!musicPlaying){
-    return;
-  }
-
-
-  const notes = [
-
-    261.63,
-    329.63,
-    392.00,
-    329.63,
-
-    293.66,
-    349.23,
-    440.00,
-    392.00
-
-  ];
-
-
-  let i =
-    0;
-
-
-  function next(){
-
-    if(!musicPlaying){
-      return;
-    }
-
-
-    playTone(
-      notes[i],
-      .45
-    );
-
-
-    i =
-      (i + 1) %
-      notes.length;
-
-
-    musicTimer =
-      setTimeout(
-        next,
-        520
-      );
-
-  }
-
-
-  next();
-
-}
-
-
-musicBtn.addEventListener(
-  "click",
-  function(){
-
-    if(musicPlaying){
-
-      stopMusic();
-
-    }else{
-
-      startMusic();
+        }
 
     }
-
-  }
 );
 
+
+/* =========================================
+   MUSIC
+========================================= */
+
+let audioContext = null;
 
 surpriseBtn.addEventListener(
-  "click",
-  function(){
+    "click",
+    async function(){
 
-    startMusic();
+        try{
 
-    heartBurst(
-      window.innerWidth / 2,
-      window.innerHeight / 2
-    );
+            if(!audioContext){
 
-  }
+                audioContext =
+                    new (
+                        window.AudioContext ||
+                        window.webkitAudioContext
+                    )();
+
+            }
+
+            if(
+                audioContext.state ===
+                "suspended"
+            ){
+
+                await audioContext.resume();
+
+            }
+
+
+            const oscillator =
+                audioContext.createOscillator();
+
+            const gain =
+                audioContext.createGain();
+
+
+            oscillator.type =
+                "sine";
+
+
+            oscillator.connect(gain);
+
+            gain.connect(
+                audioContext.destination
+            );
+
+
+            const now =
+                audioContext.currentTime;
+
+
+            oscillator.frequency.setValueAtTime(
+                440,
+                now
+            );
+
+            oscillator.frequency.linearRampToValueAtTime(
+                660,
+                now + .18
+            );
+
+            oscillator.frequency.linearRampToValueAtTime(
+                550,
+                now + .36
+            );
+
+            oscillator.frequency.linearRampToValueAtTime(
+                720,
+                now + .58
+            );
+
+
+            gain.gain.setValueAtTime(
+                0,
+                now
+            );
+
+            gain.gain.linearRampToValueAtTime(
+                .12,
+                now + .03
+            );
+
+            gain.gain.linearRampToValueAtTime(
+                0,
+                now + 1.2
+            );
+
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + 1.25
+            );
+
+
+            surpriseBtn.textContent =
+                "Playing ❤️";
+
+
+            setTimeout(
+                function(){
+
+                    surpriseBtn.textContent =
+                        "Play again 🎵";
+
+                },
+                1300
+            );
+
+
+        }catch(error){
+
+            alert(
+                "Audio is not supported in this browser."
+            );
+
+        }
+
+    }
 );
 
 
-/* =================================
-   IMAGE FALLBACK
-================================= */
+/* =========================================
+   URL CUSTOMIZATION
+=========================================
 
-photo.addEventListener(
-  "error",
-  function(){
+   Examples:
 
-    photo.src =
-      "data:image/svg+xml;charset=UTF-8," +
-      encodeURIComponent(`
+   ?name=PePe
 
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="600"
-          height="600"
-          viewBox="0 0 600 600">
+   ?msg=I%20love%20you
 
-          <rect
-            width="600"
-            height="600"
-            fill="#18050d"
-          />
+   ?photo=https%3A%2F%2Fexample.com%2Fphoto.jpg
 
-          <text
-            x="50%"
-            y="48%"
-            dominant-baseline="middle"
-            text-anchor="middle"
-            fill="#ff668d"
-            font-size="80">
+========================================= */
 
-            ❤️
+(function(){
 
-          </text>
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
-          <text
-            x="50%"
-            y="62%"
-            dominant-baseline="middle"
-            text-anchor="middle"
-            fill="#ffffff"
-            font-size="25">
 
-            Add image.jpg
+    const name =
+        params.get("name");
 
-          </text>
+    const customMessage =
+        params.get("msg");
 
-        </svg>
+    const customPhoto =
+        params.get("photo");
 
-      `);
 
-  }
-);
+    /* NAME */
+
+    if(name){
+
+        const cleanName =
+            name.trim();
+
+        title.textContent =
+            `For ${cleanName}, with love`;
+
+        smallText.textContent =
+            `You are my favorite person, ${cleanName}`;
+
+        footerName.textContent =
+            cleanName;
+
+    }
+
+
+    /* MESSAGE */
+
+    if(customMessage){
+
+        message.textContent =
+            customMessage;
+
+    }
+
+
+    /* PHOTO */
+
+    if(customPhoto){
+
+        photo.style.backgroundImage =
+            `url("${customPhoto}")`;
+
+    }
+
+})();
 
 </script>
 
